@@ -18,12 +18,12 @@
           },
           colors: {
             ph: {
-              blue: '#0038A8',      // Official Philippine Flag Royal Blue
-              crest: '#0B5394',     // BPBL Crest Blue
-              navy: '#040D21',      // Midnight Arena Backdrop
-              red: '#CE1126',       // Official Philippine Flag / Maple Leaf Crimson
-              gold: '#FCD116',      // Official Philippine Flag Star & Sun Gold
-              orange: '#E66C1F',    // Basketball & Season 9 Metallic Gold-Orange
+              blue: '#0038A8',
+              crest: '#0B5394',
+              navy: '#040D21',
+              red: '#CE1126',
+              gold: '#FCD116',
+              orange: '#E66C1F',
               white: '#FFFFFF',
             }
           }
@@ -58,54 +58,39 @@
 </head>
 <body class="font-sans antialiased selection:bg-ph-gold selection:text-ph-navy min-h-screen flex flex-col">
 
-  <!-- PHILIPPINE FLAG TOP RIBBON -->
   <div class="h-1.5 w-full ph-flag-ribbon sticky top-0 z-50"></div>
 
-  <!-- TOP BROADCAST SCOREBOARD TICKER -->
   <div class="bg-[#030917] border-b border-ph-blue/60 sticky top-1.5 z-50 shadow-lg">
     <div class="max-w-7xl mx-auto flex items-center">
       <div class="bg-ph-red px-4 py-2.5 flex items-center gap-2 shrink-0 border-r-2 border-ph-gold">
         <span class="w-2.5 h-2.5 rounded-full bg-ph-gold animate-pulse"></span>
         <span class="font-display text-lg tracking-wider uppercase font-bold text-white leading-none">SEASON 9 • OCT 24</span>
       </div>
-      <div id="ticker-container" class="flex items-center overflow-x-auto scrollbar-none divide-x divide-ph-blue/40 py-1.5 px-2">
-        <!-- Populated via JS -->
-      </div>
+      <div id="ticker-container" class="flex items-center overflow-x-auto scrollbar-none divide-x divide-ph-blue/40 py-1.5 px-2"></div>
     </div>
   </div>
 
-  <!-- MAIN PHILIPPINE FLAG & BPBL SEASON 9 BROADCAST HEADER -->
   <header class="bg-gradient-to-r from-ph-blue via-[#05153B] to-ph-red border-b-2 border-ph-gold sticky top-[47px] z-40 shadow-2xl">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-22 py-2.5 flex items-center justify-between">
       <div class="flex items-center gap-4">
-        <!-- BPBL OFFICIAL LOGO CONTAINER (Auto-loads logo.jpg or 1000015325.jpg, with built-in SVG Crest fallback) -->
         <a href="#" class="relative w-16 h-16 sm:w-18 sm:h-18 rounded-full p-0.5 bg-gradient-to-tr from-ph-blue via-white to-ph-red shadow-xl shadow-black/60 shrink-0 group">
           <img 
             id="bpbl-header-logo"
-            src="logo.jpg" 
+            src="1000015325.jpg" 
             alt="Batang Pinoy Basketball League Season 9 Logo" 
             class="w-full h-full rounded-full object-cover border-2 border-white"
-            onerror="if(this.src.endsWith('logo.jpg')){this.src='1000015325.jpg';}else{this.style.display='none';document.getElementById('bpbl-svg-fallback').classList.remove('hidden');}"
+            onerror="if(this.src.endsWith('1000015325.jpg')){this.src='logo.jpg';}else{this.style.display='none';document.getElementById('bpbl-svg-fallback').classList.remove('hidden');}"
           />
-          <!-- Exact Vector Replica of the BPBL Crest (Maple Leaf + PH Sun + Basketball + 3 Stars) if image isn't uploaded yet -->
           <svg id="bpbl-svg-fallback" class="hidden w-full h-full rounded-full" viewBox="0 0 120 120">
             <circle cx="60" cy="60" r="58" fill="#0B5394" stroke="#FFFFFF" stroke-width="3"/>
             <circle cx="60" cy="60" r="38" fill="#FFFFFF" stroke="#040D21" stroke-width="2"/>
-            <!-- Left Red Canadian Maple Leaf Half -->
             <path d="M60 25 L52 38 L42 35 L46 48 L34 50 L42 60 L38 65 L60 65 Z" fill="#CE1126"/>
-            <!-- Right Gold Philippine Sun Rays Half -->
             <path d="M60 25 L66 42 L74 32 L70 46 L84 42 L73 53 L86 54 L73 60 L84 65 L60 65 Z" fill="#FCD116" stroke="#991B1B" stroke-width="0.8"/>
-            <!-- Center Basketball -->
             <circle cx="60" cy="54" r="15" fill="#E66C1F" stroke="#1E293B" stroke-width="1.8"/>
             <path d="M45 54 Q60 48 75 54 M60 39 L60 69 M49 43 Q60 54 49 65 M71 43 Q60 54 71 65" fill="none" stroke="#1E293B" stroke-width="1.5"/>
-            <!-- Rim & Net -->
             <rect x="40" y="69" width="40" height="3" rx="1.5" fill="#D97706" stroke="#1E293B" stroke-width="1"/>
             <path d="M43 72 L48 92 L72 92 L77 72" fill="none" stroke="#E2E8F0" stroke-width="1.8" stroke-dasharray="3,2"/>
-            <path d="M46 80 L74 80 M48 87 L72 87 M52 72 L55 92 M60 72 L60 92 M68 72 L65 92" fill="none" stroke="#CBD5E1" stroke-width="1.2"/>
-            <!-- 3 Gold Stars on Blue Ring -->
             <polygon points="60,4 63,11 70,11 64,15 66,22 60,18 54,22 56,15 50,11 57,11" fill="#FCD116" stroke="#FFFFFF" stroke-width="1"/>
-            <polygon points="14,52 17,58 23,58 18,62 20,68 14,64 8,68 10,62 5,58 11,58" fill="#FCD116" stroke="#FFFFFF" stroke-width="1"/>
-            <polygon points="106,52 109,58 115,58 110,62 112,68 106,64 100,68 102,62 97,58 103,58" fill="#FCD116" stroke="#FFFFFF" stroke-width="1"/>
           </svg>
         </a>
 
@@ -137,8 +122,6 @@
   </header>
 
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12 flex-1">
-
-    <!-- SEASON 9 SPOTLIGHT BANNER + HERO STORYLINES -->
     <section id="storylines" class="space-y-4">
       <div class="flex items-center justify-between border-b-2 border-ph-gold/40 pb-2">
         <div class="flex items-center gap-2.5">
@@ -154,16 +137,7 @@
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        <!-- Main Feature Story (With Season 9 Crest Showcase) -->
         <div class="lg:col-span-7 bg-gradient-to-br from-ph-blue via-[#061844] to-ph-red rounded-2xl border-2 border-ph-gold/80 p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden shadow-2xl">
-          <!-- Subtle Season 9 Logo Watermark in Corner -->
-          <img 
-            src="logo.jpg" 
-            alt="" 
-            class="absolute -right-10 -bottom-10 w-64 h-64 rounded-full opacity-15 pointer-events-none object-cover"
-            onerror="if(this.src.endsWith('logo.jpg')){this.src='1000015325.jpg';}else{this.style.display='none';}"
-          />
-
           <div class="space-y-4 relative z-10">
             <div class="flex flex-wrap items-center gap-2">
               <span class="bg-ph-red border border-white/30 text-white text-[11px] font-extrabold uppercase tracking-widest px-3 py-1 rounded shadow">
@@ -181,7 +155,6 @@
             </p>
           </div>
 
-          <!-- 3-Star Unbeaten Team Boxes -->
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-6 mt-6 border-t border-white/20 relative z-10">
             <div class="bg-ph-navy/85 p-3.5 rounded-xl border-l-4 border-ph-gold">
               <div class="text-[11px] font-mono text-ph-gold uppercase font-bold">★ #1 Bambhorats Knights</div>
@@ -201,9 +174,8 @@
           </div>
         </div>
 
-        <!-- Secondary Storyline Stack (Blue, Red, Gold Accented Cards) -->
         <div class="lg:col-span-5 flex flex-col justify-between gap-4">
-          <div class="ph-card rounded-xl border-l-4 border-l-ph-gold border border-ph-blue/50 p-5 hover:border-ph-gold transition shadow-lg">
+          <div class="ph-card rounded-xl border-l-4 border-l-ph-gold border border-ph-blue/50 p-5 shadow-lg">
             <div class="flex items-center justify-between mb-1.5">
               <span class="text-[11px] font-mono uppercase font-extrabold text-ph-gold">☀ Season 9 Scoring King</span>
               <span class="text-xs font-mono text-blue-200">96 PTS in 4 Tracked Games</span>
@@ -212,11 +184,11 @@
               Silent Threat's Jerome Verchez Leads All BPBL Scorers With 96 Points
             </h4>
             <p class="text-xs sm:text-sm text-blue-100 mt-1.5 leading-relaxed">
-              <strong>Jerome Verchez</strong> has been an unstoppable bucket-getter for <strong>Silent Threat (3–2)</strong>, pacing the entire league with <strong>96 recorded points (24.0 PPG)</strong> on 27 two-pointers, 9 triples, and 15 free throws—while also tying teammate <strong>Edson Lozada</strong> for #2 in steals (11 STL).
+              <strong>Jerome Verchez</strong> has been an unstoppable bucket-getter for <strong>Silent Threat (3–2)</strong>, pacing the entire league with <strong>96 recorded points (24.0 PPG)</strong> on 27 two-pointers, 9 triples, and 15 free throws.
             </p>
           </div>
 
-          <div class="ph-card rounded-xl border-l-4 border-l-ph-red border border-ph-blue/50 p-5 hover:border-ph-gold transition shadow-lg">
+          <div class="ph-card rounded-xl border-l-4 border-l-ph-red border border-ph-blue/50 p-5 shadow-lg">
             <div class="flex items-center justify-between mb-1.5">
               <span class="text-[11px] font-mono uppercase font-extrabold text-rose-300">★ Baliklaro 35+ Logjam</span>
               <span class="text-xs font-mono text-blue-200">4-Way Tie at 3–1</span>
@@ -225,11 +197,11 @@
               Bernardino (20 3PM) & Sadornas (34 REB) Lift Salty Crew Into 4-Way Tie at 3–1
             </h4>
             <p class="text-xs sm:text-sm text-blue-100 mt-1.5 leading-relaxed">
-              Splash king <strong>Edward Bernardino</strong> (73 PTS, league-high <strong>20 3PM</strong>) and paint beast <strong>Paul Sadornas</strong> (70 PTS, co-league-high <strong>34 REB</strong>) powered Salty Crew 35+ past Bisdak 35+ (61–52), forging a 4-way tie at 3–1 alongside <strong>Bryan Onal's Pipers 35+</strong> (71 PTS) and <strong>FRP 35+</strong>.
+              Splash king <strong>Edward Bernardino</strong> (73 PTS, league-high <strong>20 3PM</strong>) and paint beast <strong>Paul Sadornas</strong> (70 PTS, co-league-high <strong>34 REB</strong>) powered Salty Crew 35+.
             </p>
           </div>
 
-          <div class="ph-card rounded-xl border-l-4 border-l-ph-blue border border-ph-blue/50 p-5 hover:border-ph-gold transition shadow-lg">
+          <div class="ph-card rounded-xl border-l-4 border-l-ph-blue border border-ph-blue/50 p-5 shadow-lg">
             <div class="flex items-center justify-between mb-1.5">
               <span class="text-[11px] font-mono uppercase font-extrabold text-sky-300">★ Defensive Lockdown</span>
               <span class="text-xs font-mono text-blue-200">Wild Tribe at 4–1</span>
@@ -238,14 +210,13 @@
               Ryan Cabico (16 STL) & Alvin Domenden (31 REB) Anchor 4–1 Wild Tribe
             </h4>
             <p class="text-xs sm:text-sm text-blue-100 mt-1.5 leading-relaxed">
-              League steals leader <strong>Ryan Cabico</strong> (16 STL, 12 AST, 3 BLK), two-way force <strong>Alvin Domenden</strong> (65 PTS, 31 REB, 10 STL), and <strong>Lordrikk Gutierrez</strong> (69 PTS, 9 STL) have Wild Tribe sitting at 4–1 (+55).
+              League steals leader <strong>Ryan Cabico</strong> (16 STL, 12 AST, 3 BLK) and two-way force <strong>Alvin Domenden</strong> (65 PTS, 31 REB, 10 STL) have Wild Tribe sitting at 4–1 (+55).
             </p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- INTERACTIVE PLAYER LEADERBOARDS SECTION -->
     <section id="leaders" class="space-y-5">
       <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b-2 border-ph-gold/40 pb-3">
         <div>
@@ -256,50 +227,25 @@
           <p class="text-xs text-blue-200 mt-0.5">Filter by Category & Division • 86 of 100 Team Sides Tracked via iTala Mobile App</p>
         </div>
 
-        <!-- Division Switcher for Leaderboards -->
         <div class="inline-flex bg-[#030917] p-1 rounded-xl border border-ph-blue/60 self-start">
-          <button onclick="setLeaderDivision('ALL')" id="ldr-div-all" class="px-4 py-1.5 rounded-lg text-xs font-extrabold uppercase tracking-wider transition bg-ph-gold text-ph-navy shadow">
-            ☀ All BPBL
-          </button>
-          <button onclick="setLeaderDivision('OPEN')" id="ldr-div-open" class="px-4 py-1.5 rounded-lg text-xs font-extrabold uppercase tracking-wider transition text-blue-200 hover:text-white">
-            Open Division
-          </button>
-          <button onclick="setLeaderDivision('35+')" id="ldr-div-35" class="px-4 py-1.5 rounded-lg text-xs font-extrabold uppercase tracking-wider transition text-blue-200 hover:text-white">
-            Baliklaro 35+
-          </button>
+          <button onclick="setLeaderDivision('ALL')" id="ldr-div-all" class="px-4 py-1.5 rounded-lg text-xs font-extrabold uppercase tracking-wider transition bg-ph-gold text-ph-navy shadow">☀ All BPBL</button>
+          <button onclick="setLeaderDivision('OPEN')" id="ldr-div-open" class="px-4 py-1.5 rounded-lg text-xs font-extrabold uppercase tracking-wider transition text-blue-200 hover:text-white">Open Division</button>
+          <button onclick="setLeaderDivision('35+')" id="ldr-div-35" class="px-4 py-1.5 rounded-lg text-xs font-extrabold uppercase tracking-wider transition text-blue-200 hover:text-white">Baliklaro 35+</button>
         </div>
       </div>
 
-      <!-- Category Tabs -->
       <div class="flex items-center gap-2 overflow-x-auto scrollbar-none pb-1">
-        <button onclick="setLeaderCategory('pts')" id="cat-pts" class="px-4 py-2 rounded-xl text-xs font-extrabold uppercase tracking-wider transition bg-ph-blue text-white border-2 border-ph-gold shrink-0 shadow-lg">
-          🔥 Scoring (PTS)
-        </button>
-        <button onclick="setLeaderCategory('reb')" id="cat-reb" class="px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition bg-[#071536] text-blue-100 hover:text-white border border-ph-blue/50 shrink-0">
-          💪 Rebounds (REB)
-        </button>
-        <button onclick="setLeaderCategory('ast')" id="cat-ast" class="px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition bg-[#071536] text-blue-100 hover:text-white border border-ph-blue/50 shrink-0">
-          🎯 Assists (AST)
-        </button>
-        <button onclick="setLeaderCategory('stl')" id="cat-stl" class="px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition bg-[#071536] text-blue-100 hover:text-white border border-ph-blue/50 shrink-0">
-          ⚡ Steals (STL)
-        </button>
-        <button onclick="setLeaderCategory('blk')" id="cat-blk" class="px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition bg-[#071536] text-blue-100 hover:text-white border border-ph-blue/50 shrink-0">
-          🛡️ Blocks (BLK)
-        </button>
-        <button onclick="setLeaderCategory('tpm')" id="cat-tpm" class="px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition bg-[#071536] text-blue-100 hover:text-white border border-ph-blue/50 shrink-0">
-          🏹 3-Pointers Made (3PM)
-        </button>
+        <button onclick="setLeaderCategory('pts')" id="cat-pts" class="px-4 py-2 rounded-xl text-xs font-extrabold uppercase tracking-wider transition bg-ph-blue text-white border-2 border-ph-gold shrink-0 shadow-lg">🔥 Scoring (PTS)</button>
+        <button onclick="setLeaderCategory('reb')" id="cat-reb" class="px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition bg-[#071536] text-blue-100 hover:text-white border border-ph-blue/50 shrink-0">💪 Rebounds (REB)</button>
+        <button onclick="setLeaderCategory('ast')" id="cat-ast" class="px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition bg-[#071536] text-blue-100 hover:text-white border border-ph-blue/50 shrink-0">🎯 Assists (AST)</button>
+        <button onclick="setLeaderCategory('stl')" id="cat-stl" class="px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition bg-[#071536] text-blue-100 hover:text-white border border-ph-blue/50 shrink-0">⚡ Steals (STL)</button>
+        <button onclick="setLeaderCategory('blk')" id="cat-blk" class="px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition bg-[#071536] text-blue-100 hover:text-white border border-ph-blue/50 shrink-0">🛡️ Blocks (BLK)</button>
+        <button onclick="setLeaderCategory('tpm')" id="cat-tpm" class="px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition bg-[#071536] text-blue-100 hover:text-white border border-ph-blue/50 shrink-0">🏹 3-Pointers Made (3PM)</button>
       </div>
 
-      <!-- Spotlight Card + Leaderboard Table Grid -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-        <!-- #1 Leader Spotlight Card -->
-        <div id="leader-spotlight" class="lg:col-span-4 bg-gradient-to-b from-ph-blue via-[#061844] to-ph-red border-2 border-ph-gold rounded-2xl p-6 shadow-2xl relative overflow-hidden">
-          <!-- Populated via JS -->
-        </div>
+        <div id="leader-spotlight" class="lg:col-span-4 bg-gradient-to-b from-ph-blue via-[#061844] to-ph-red border-2 border-ph-gold rounded-2xl p-6 shadow-2xl relative overflow-hidden"></div>
 
-        <!-- Top 15 Leaderboard Table -->
         <div class="lg:col-span-8 ph-card border border-ph-blue/60 rounded-2xl overflow-hidden shadow-2xl">
           <div class="p-4 bg-gradient-to-r from-ph-blue/80 via-[#071536] to-ph-red/80 border-b border-ph-gold/40 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
@@ -311,20 +257,15 @@
           <div class="overflow-x-auto">
             <table class="w-full text-left border-collapse">
               <thead>
-                <tr id="leader-thead" class="bg-[#030917] border-b border-ph-blue/50 text-[11px] font-mono uppercase text-ph-gold">
-                  <!-- Populated via JS -->
-                </tr>
+                <tr id="leader-thead" class="bg-[#030917] border-b border-ph-blue/50 text-[11px] font-mono uppercase text-ph-gold"></tr>
               </thead>
-              <tbody id="leader-tbody" class="divide-y divide-ph-blue/30 text-sm">
-                <!-- Populated via JS -->
-              </tbody>
+              <tbody id="leader-tbody" class="divide-y divide-ph-blue/30 text-sm"></tbody>
             </table>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- OFFICIAL STANDINGS SECTION -->
     <section id="standings" class="space-y-4">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b-2 border-ph-gold/40 pb-3">
         <div>
@@ -336,12 +277,8 @@
         </div>
 
         <div class="inline-flex bg-[#030917] p-1 rounded-xl border border-ph-blue/60 self-start">
-          <button onclick="switchStandingsDivision('open')" id="btn-standings-open" class="px-4 py-1.5 rounded-lg text-xs font-extrabold uppercase tracking-wider transition bg-ph-blue text-white border border-ph-gold shadow">
-            BPBL Open Division (14)
-          </button>
-          <button onclick="switchStandingsDivision('35plus')" id="btn-standings-35plus" class="px-4 py-1.5 rounded-lg text-xs font-extrabold uppercase tracking-wider transition text-blue-200 hover:text-white">
-            Baliklaro 35+ (7)
-          </button>
+          <button onclick="switchStandingsDivision('open')" id="btn-standings-open" class="px-4 py-1.5 rounded-lg text-xs font-extrabold uppercase tracking-wider transition bg-ph-blue text-white border border-ph-gold shadow">BPBL Open Division (14)</button>
+          <button onclick="switchStandingsDivision('35plus')" id="btn-standings-35plus" class="px-4 py-1.5 rounded-lg text-xs font-extrabold uppercase tracking-wider transition text-blue-200 hover:text-white">Baliklaro 35+ (7)</button>
         </div>
       </div>
 
@@ -363,15 +300,12 @@
                 <th class="py-3.5 px-4 text-center hidden md:table-cell">Status / Tier</th>
               </tr>
             </thead>
-            <tbody id="standings-tbody" class="divide-y divide-ph-blue/30 text-sm">
-              <!-- Populated via JS -->
-            </tbody>
+            <tbody id="standings-tbody" class="divide-y divide-ph-blue/30 text-sm"></tbody>
           </table>
         </div>
       </div>
     </section>
 
-    <!-- COMPLETE 50-GAME RESULTS LOG -->
     <section id="results" class="space-y-4">
       <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b-2 border-ph-gold/40 pb-3">
         <div>
@@ -402,14 +336,10 @@
         </div>
       </div>
 
-      <div id="games-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <!-- Populated via JS -->
-      </div>
+      <div id="games-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
     </section>
-
   </main>
 
-  <!-- PHILIPPINE FLAG FOOTER -->
   <div class="h-1.5 w-full ph-flag-ribbon mt-12"></div>
   <footer class="bg-[#030917] py-8">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-blue-200">
@@ -419,16 +349,11 @@
           <span class="font-bold text-white">BATANG PINOY BASKETBALL LEAGUE (BPBL) — SEASON 9</span> • Official Standings, Stats & Results Hub
         </div>
       </div>
-      <div>
-        Source: iTala Connect Official Reports (50 Games Scored • 86/100 Team Sides Mobile Tracked • Oct 30, 2026)
-      </div>
+      <div>Source: iTala Connect Official Reports (50 Games Scored • 86/100 Team Sides Mobile Tracked • Oct 30, 2026)</div>
     </div>
   </footer>
 
   <script>
-    // =========================================================================
-    // OFFICIAL BPBL SEASON 9 DATA (ITALA CONNECT PDF REPORTS - OCT 30, 2026)
-    // =========================================================================
     const BPBL_DATA = {
       standings: {
         open: [
@@ -457,8 +382,6 @@
           { rank: 7, team: "MAMBA BALLERS 35+", gp: 5, w: 0, l: 5, pf: 294, pa: 402, diff: -108 }
         ]
       },
-
-      // Official Player Stats from iTala Connect 51-Page Report
       players: [
         { name: "Jerome Verchez", team: "SILENT THREAT", div: "OPEN", gp: 4, pts: 96, fg2: 27, tpm: 9, ftm: 15, reb: 11, ast: 4, stl: 11, blk: 1 },
         { name: "Jake Gaspar", team: "QUOLOS CONSTRUCTION", div: "OPEN", gp: 4, pts: 78, fg2: 23, tpm: 7, ftm: 11, reb: 28, ast: 7, stl: 8, blk: 1 },
@@ -519,9 +442,7 @@
         { name: "Roy Apigo", team: "SANDO REPUBLIKA", div: "OPEN", gp: 4, pts: 30, fg2: 10, tpm: 3, ftm: 1, reb: 16, ast: 2, stl: 9, blk: 0 },
         { name: "Cabahug", team: "FITMAN HUNTER", div: "OPEN", gp: 4, pts: 30, fg2: 14, tpm: 0, ftm: 2, reb: 13, ast: 4, stl: 2, blk: 3 }
       ],
-
       games: [
-        // WEEK 1 - 12/09/2026
         { date: "12/09/2026", division: "BPBL OPEN DIVISION", home: "GENTLEMEN'S CLUB", homeScore: 57, awayScore: 75, away: "HAIDES X JOURNEY" },
         { date: "12/09/2026", division: "BPBL BALIKLARO 35+", home: "SALTY CREW 35+", homeScore: 70, awayScore: 52, away: "BAMBHORATS KNIGHTS 35+" },
         { date: "12/09/2026", division: "BPBL OPEN DIVISION", home: "WILD TRIBE", homeScore: 62, awayScore: 52, away: "PIPERS" },
@@ -532,8 +453,6 @@
         { date: "12/09/2026", division: "BPBL OPEN DIVISION", home: "SILENT THREAT", homeScore: 68, awayScore: 58, away: "QUOLOS CONSTRUCTION" },
         { date: "12/09/2026", division: "BPBL BALIKLARO 35+", home: "PIPERS 35+", homeScore: 61, awayScore: 53, away: "JMC ALLIANCE 35+" },
         { date: "12/09/2026", division: "BPBL OPEN DIVISION", home: "DENTIO DENTAL", homeScore: 79, awayScore: 87, away: "SLYTHERIN" },
-
-        // WEEK 2 - 19/09/2026
         { date: "19/09/2026", division: "BPBL OPEN DIVISION", home: "WILD TRIBE", homeScore: 61, awayScore: 46, away: "SLYTHERIN" },
         { date: "19/09/2026", division: "BPBL BALIKLARO 35+", home: "SALTY CREW 35+", homeScore: 61, awayScore: 58, away: "PIPERS 35+" },
         { date: "19/09/2026", division: "BPBL OPEN DIVISION", home: "L2G", homeScore: 62, awayScore: 89, away: "HAIDES X JOURNEY" },
@@ -544,8 +463,6 @@
         { date: "19/09/2026", division: "BPBL OPEN DIVISION", home: "GENTLEMEN'S CLUB", homeScore: 56, awayScore: 105, away: "JMC ALLIANCE" },
         { date: "19/09/2026", division: "BPBL BALIKLARO 35+", home: "FRP 35+", homeScore: 64, awayScore: 45, away: "JMC ALLIANCE 35+" },
         { date: "19/09/2026", division: "BPBL OPEN DIVISION", home: "QUOLOS CONSTRUCTION", homeScore: 74, awayScore: 90, away: "EPIC GRILL SILOGS" },
-
-        // WEEK 3 - 26/09/2026
         { date: "26/09/2026", division: "BPBL OPEN DIVISION", home: "QUOLOS CONSTRUCTION", homeScore: 65, awayScore: 72, away: "HAIDES X JOURNEY" },
         { date: "26/09/2026", division: "BPBL BALIKLARO 35+", home: "MAMBA BALLERS 35+", homeScore: 60, awayScore: 74, away: "FRP 35+" },
         { date: "26/09/2026", division: "BPBL OPEN DIVISION", home: "GENTLEMEN'S CLUB", homeScore: 54, awayScore: 71, away: "FITMAN HUNTER" },
@@ -556,8 +473,6 @@
         { date: "26/09/2026", division: "BPBL OPEN DIVISION", home: "SILENT THREAT", homeScore: 63, awayScore: 54, away: "SLYTHERIN" },
         { date: "26/09/2026", division: "BPBL OPEN DIVISION", home: "EPIC GRILL SILOGS", homeScore: 46, awayScore: 65, away: "PIPERS" },
         { date: "26/09/2026", division: "BPBL BALIKLARO 35+", home: "SALTY CREW 35+", homeScore: 70, awayScore: 79, away: "JMC ALLIANCE 35+" },
-
-        // WEEK 4 - 17/10/2026
         { date: "17/10/2026", division: "BPBL OPEN DIVISION", home: "WILD TRIBE", homeScore: 84, awayScore: 59, away: "DENTIO DENTAL" },
         { date: "17/10/2026", division: "BPBL BALIKLARO 35+", home: "BAMBHORATS KNIGHTS 35+", homeScore: 52, awayScore: 69, away: "PIPERS 35+" },
         { date: "17/10/2026", division: "BPBL OPEN DIVISION", home: "PIPERS", homeScore: 64, awayScore: 93, away: "HAIDES X JOURNEY" },
@@ -568,8 +483,6 @@
         { date: "17/10/2026", division: "BPBL OPEN DIVISION", home: "L2G", homeScore: 61, awayScore: 68, away: "FITMAN HUNTER" },
         { date: "17/10/2026", division: "BPBL OPEN DIVISION", home: "SILENT THREAT", homeScore: 84, awayScore: 91, away: "BAMBHORATS KNIGHTS" },
         { date: "17/10/2026", division: "BPBL BALIKLARO 35+", home: "BISDAK 35+", homeScore: 64, awayScore: 52, away: "FRP 35+" },
-
-        // WEEK 5 - 24/10/2026
         { date: "24/10/2026", division: "BPBL OPEN DIVISION", home: "QUOLOS CONSTRUCTION", homeScore: 73, awayScore: 70, away: "FITMAN HUNTER" },
         { date: "24/10/2026", division: "BPBL OPEN DIVISION", home: "HAIDES X JOURNEY", homeScore: 54, awayScore: 46, away: "SLYTHERIN" },
         { date: "24/10/2026", division: "BPBL BALIKLARO 35+", home: "PIPERS 35+", homeScore: 91, awayScore: 55, away: "MAMBA BALLERS 35+" },
@@ -583,33 +496,26 @@
       ]
     };
 
-    // =========================================================================
-    // LEADERBOARD CONTROLLER
-    // =========================================================================
     let activeLeaderCategory = 'pts';
     let activeLeaderDivision = 'ALL';
 
     const CATEGORY_META = {
-      pts: { title: "Season 9 Recorded Points Leaderboard", label: "PTS", perGameLabel: "PPG", color: "text-ph-gold" },
-      reb: { title: "Season 9 Rebounds Leaderboard", label: "REB", perGameLabel: "RPG", color: "text-ph-gold" },
-      ast: { title: "Season 9 Assists Leaderboard", label: "AST", perGameLabel: "APG", color: "text-ph-gold" },
-      stl: { title: "Season 9 Steals Leaderboard", label: "STL", perGameLabel: "SPG", color: "text-ph-gold" },
-      blk: { title: "Season 9 Blocks Leaderboard", label: "BLK", perGameLabel: "BPG", color: "text-ph-gold" },
-      tpm: { title: "Season 9 3-Pointers Made Leaderboard", label: "3PM", perGameLabel: "3PG", color: "text-ph-gold" }
+      pts: { title: "Season 9 Recorded Points Leaderboard", label: "PTS", perGameLabel: "PPG" },
+      reb: { title: "Season 9 Rebounds Leaderboard", label: "REB", perGameLabel: "RPG" },
+      ast: { title: "Season 9 Assists Leaderboard", label: "AST", perGameLabel: "APG" },
+      stl: { title: "Season 9 Steals Leaderboard", label: "STL", perGameLabel: "SPG" },
+      blk: { title: "Season 9 Blocks Leaderboard", label: "BLK", perGameLabel: "BPG" },
+      tpm: { title: "Season 9 3-Pointers Made Leaderboard", label: "3PM", perGameLabel: "3PG" }
     };
 
     function setLeaderDivision(div) {
       activeLeaderDivision = div;
-      const btns = {
-        'ALL': document.getElementById('ldr-div-all'),
-        'OPEN': document.getElementById('ldr-div-open'),
-        '35+': document.getElementById('ldr-div-35')
-      };
-      Object.keys(btns).forEach(k => {
-        if (k === div) {
-          btns[k].className = "px-4 py-1.5 rounded-lg text-xs font-extrabold uppercase tracking-wider transition bg-ph-gold text-ph-navy shadow";
-        } else {
-          btns[k].className = "px-4 py-1.5 rounded-lg text-xs font-extrabold uppercase tracking-wider transition text-blue-200 hover:text-white";
+      ['ALL', 'OPEN', '35+'].forEach(k => {
+        const btn = document.getElementById('ldr-div-' + (k === '35+' ? '35' : k.toLowerCase()));
+        if (btn) {
+          btn.className = (k === div) 
+            ? "px-4 py-1.5 rounded-lg text-xs font-extrabold uppercase tracking-wider transition bg-ph-gold text-ph-navy shadow"
+            : "px-4 py-1.5 rounded-lg text-xs font-extrabold uppercase tracking-wider transition text-blue-200 hover:text-white";
         }
       });
       renderLeaderboards();
@@ -617,13 +523,12 @@
 
     function setLeaderCategory(cat) {
       activeLeaderCategory = cat;
-      const cats = ['pts', 'reb', 'ast', 'stl', 'blk', 'tpm'];
-      cats.forEach(c => {
-        const el = document.getElementById(`cat-${c}`);
-        if (c === cat) {
-          el.className = "px-4 py-2 rounded-xl text-xs font-extrabold uppercase tracking-wider transition bg-ph-blue text-white border-2 border-ph-gold shrink-0 shadow-lg";
-        } else {
-          el.className = "px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition bg-[#071536] text-blue-100 hover:text-white border border-ph-blue/50 shrink-0";
+      ['pts', 'reb', 'ast', 'stl', 'blk', 'tpm'].forEach(c => {
+        const el = document.getElementById('cat-' + c);
+        if (el) {
+          el.className = (c === cat)
+            ? "px-4 py-2 rounded-xl text-xs font-extrabold uppercase tracking-wider transition bg-ph-blue text-white border-2 border-ph-gold shrink-0 shadow-lg"
+            : "px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition bg-[#071536] text-blue-100 hover:text-white border border-ph-blue/50 shrink-0";
         }
       });
       renderLeaderboards();
@@ -631,164 +536,92 @@
 
     function renderLeaderboards() {
       const meta = CATEGORY_META[activeLeaderCategory];
-      document.getElementById('leader-table-title').textContent = meta.title;
-      const search = document.getElementById('leader-search').value.trim().toLowerCase();
+      const titleEl = document.getElementById('leader-table-title');
+      if (titleEl) titleEl.textContent = meta.title;
+      const searchEl = document.getElementById('leader-search');
+      const search = searchEl ? searchEl.value.trim().toLowerCase() : '';
 
       const sorted = BPBL_DATA.players
         .filter(p => activeLeaderDivision === 'ALL' || p.div === activeLeaderDivision)
         .filter(p => !search || p.name.toLowerCase().includes(search) || p.team.toLowerCase().includes(search))
-        .sort((a, b) => {
-          if (b[activeLeaderCategory] !== a[activeLeaderCategory]) {
-            return b[activeLeaderCategory] - a[activeLeaderCategory];
-          }
-          return (b[activeLeaderCategory] / b.gp) - (a[activeLeaderCategory] / a.gp);
-        });
+        .sort((a, b) => b[activeLeaderCategory] - a[activeLeaderCategory]);
 
       const spotlight = document.getElementById('leader-spotlight');
       const thead = document.getElementById('leader-thead');
       const tbody = document.getElementById('leader-tbody');
 
-      if (sorted.length === 0) {
-        spotlight.innerHTML = `<div class="text-blue-200 text-sm py-8 text-center">No players match your search.</div>`;
-        tbody.innerHTML = `<tr><td colspan="8" class="py-8 text-center text-blue-200">No matching players found.</td></tr>`;
+      if (!sorted.length) {
+        if (spotlight) spotlight.innerHTML = `<div class="text-blue-200 text-sm py-8 text-center">No players match your search.</div>`;
+        if (tbody) tbody.innerHTML = `<tr><td colspan="8" class="py-8 text-center text-blue-200">No matching players found.</td></tr>`;
         return;
       }
 
       const top = sorted[0];
       const topPerGame = (top[activeLeaderCategory] / top.gp).toFixed(1);
 
-      spotlight.innerHTML = `
-        <div class="space-y-4 relative z-10">
-          <div class="flex items-center justify-between">
-            <span class="px-3 py-1 rounded-full bg-ph-gold text-ph-navy font-mono text-[10px] uppercase font-extrabold shadow">
-              ☀ #1 ${meta.label} Leader (${activeLeaderDivision === 'ALL' ? 'All BPBL' : activeLeaderDivision})
-            </span>
-            <span class="font-mono text-xs text-blue-100 font-bold">${top.gp} Tracked GP</span>
-          </div>
-          <div>
-            <div class="text-xs font-mono uppercase text-ph-gold font-bold">★ ${top.team}</div>
-            <h4 class="font-display text-4xl font-bold uppercase text-white tracking-wide mt-0.5">${top.name}</h4>
-          </div>
-          <div class="bg-[#030917]/90 border-2 border-ph-gold/60 rounded-xl p-4 flex items-baseline justify-between">
+      if (spotlight) {
+        spotlight.innerHTML = `
+          <div class="space-y-4 relative z-10">
+            <div class="flex items-center justify-between">
+              <span class="px-3 py-1 rounded-full bg-ph-gold text-ph-navy font-mono text-[10px] uppercase font-extrabold shadow">
+                ☀ #1 ${meta.label} Leader (${activeLeaderDivision === 'ALL' ? 'All BPBL' : activeLeaderDivision})
+              </span>
+              <span class="font-mono text-xs text-blue-100 font-bold">${top.gp} Tracked GP</span>
+            </div>
             <div>
-              <div class="text-[11px] font-mono uppercase text-blue-200">Total ${meta.label}</div>
-              <div class="font-display text-5xl font-bold text-ph-gold leading-none mt-1">${top[activeLeaderCategory]}</div>
+              <div class="text-xs font-mono uppercase text-ph-gold font-bold">★ ${top.team}</div>
+              <h4 class="font-display text-4xl font-bold uppercase text-white tracking-wide mt-0.5">${top.name}</h4>
             </div>
-            <div class="text-right">
-              <div class="text-[11px] font-mono uppercase text-blue-200">${meta.perGameLabel} Average</div>
-              <div class="font-mono text-2xl font-bold text-white mt-1">${topPerGame}</div>
+            <div class="bg-[#030917]/90 border-2 border-ph-gold/60 rounded-xl p-4 flex items-baseline justify-between">
+              <div>
+                <div class="text-[11px] font-mono uppercase text-blue-200">Total ${meta.label}</div>
+                <div class="font-display text-5xl font-bold text-ph-gold leading-none mt-1">${top[activeLeaderCategory]}</div>
+              </div>
+              <div class="text-right">
+                <div class="text-[11px] font-mono uppercase text-blue-200">${meta.perGameLabel} Average</div>
+                <div class="font-mono text-2xl font-bold text-white mt-1">${topPerGame}</div>
+              </div>
             </div>
-          </div>
-          <div class="grid grid-cols-4 gap-2 pt-2 text-center">
-            <div class="bg-[#030917]/80 border border-white/20 rounded-lg p-2">
-              <div class="text-[10px] font-mono text-ph-gold">PTS</div>
-              <div class="font-mono text-sm font-bold text-white">${top.pts}</div>
-            </div>
-            <div class="bg-[#030917]/80 border border-white/20 rounded-lg p-2">
-              <div class="text-[10px] font-mono text-ph-gold">REB</div>
-              <div class="font-mono text-sm font-bold text-white">${top.reb}</div>
-            </div>
-            <div class="bg-[#030917]/80 border border-white/20 rounded-lg p-2">
-              <div class="text-[10px] font-mono text-ph-gold">AST</div>
-              <div class="font-mono text-sm font-bold text-white">${top.ast}</div>
-            </div>
-            <div class="bg-[#030917]/80 border border-white/20 rounded-lg p-2">
-              <div class="text-[10px] font-mono text-ph-gold">STL</div>
-              <div class="font-mono text-sm font-bold text-white">${top.stl}</div>
+            <div class="grid grid-cols-4 gap-2 pt-2 text-center">
+              <div class="bg-[#030917]/80 border border-white/20 rounded-lg p-2"><div class="text-[10px] font-mono text-ph-gold">PTS</div><div class="font-mono text-sm font-bold text-white">${top.pts}</div></div>
+              <div class="bg-[#030917]/80 border border-white/20 rounded-lg p-2"><div class="text-[10px] font-mono text-ph-gold">REB</div><div class="font-mono text-sm font-bold text-white">${top.reb}</div></div>
+              <div class="bg-[#030917]/80 border border-white/20 rounded-lg p-2"><div class="text-[10px] font-mono text-ph-gold">AST</div><div class="font-mono text-sm font-bold text-white">${top.ast}</div></div>
+              <div class="bg-[#030917]/80 border border-white/20 rounded-lg p-2"><div class="text-[10px] font-mono text-ph-gold">STL</div><div class="font-mono text-sm font-bold text-white">${top.stl}</div></div>
             </div>
           </div>
-        </div>
-      `;
-
-      if (activeLeaderCategory === 'pts' || activeLeaderCategory === 'tpm') {
-        thead.innerHTML = `
-          <th class="py-3 px-4 w-12">Rank</th>
-          <th class="py-3 px-4">Player</th>
-          <th class="py-3 px-3 text-center">GP</th>
-          <th class="py-3 px-3 text-center hidden sm:table-cell">2PM</th>
-          <th class="py-3 px-3 text-center">3PM</th>
-          <th class="py-3 px-3 text-center hidden sm:table-cell">FTM</th>
-          <th class="py-3 px-3 text-right">PTS</th>
-          <th class="py-3 px-4 text-right">${meta.perGameLabel}</th>
-        `;
-      } else {
-        thead.innerHTML = `
-          <th class="py-3 px-4 w-12">Rank</th>
-          <th class="py-3 px-4">Player</th>
-          <th class="py-3 px-3 text-center">Eligible GP</th>
-          <th class="py-3 px-3 text-center hidden sm:table-cell">PTS</th>
-          <th class="py-3 px-3 text-right font-bold text-white">Total ${meta.label}</th>
-          <th class="py-3 px-4 text-right">${meta.perGameLabel}</th>
         `;
       }
 
-      tbody.innerHTML = sorted.slice(0, 15).map((p, idx) => {
-        const perGame = (p[activeLeaderCategory] / p.gp).toFixed(1);
-        const divTag = p.div === '35+' 
-          ? `<span class="ml-1.5 text-[10px] font-mono px-1.5 py-0.5 rounded bg-ph-red text-white border border-ph-gold/40">35+</span>`
-          : `<span class="ml-1.5 text-[10px] font-mono px-1.5 py-0.5 rounded bg-ph-blue text-white border border-ph-gold/40">OPEN</span>`;
-
+      if (thead) {
         if (activeLeaderCategory === 'pts' || activeLeaderCategory === 'tpm') {
-          return `
-            <tr class="hover:bg-ph-blue/30 transition">
-              <td class="py-3 px-4 font-mono font-bold ${idx < 3 ? 'text-ph-gold' : 'text-blue-200'}">${idx < 3 ? '★ ' : ''}#${idx + 1}</td>
-              <td class="py-3 px-4">
-                <div class="font-bold text-white">${p.name} ${divTag}</div>
-                <div class="text-[11px] font-mono text-blue-200">${p.team}</div>
-              </td>
-              <td class="py-3 px-3 text-center font-mono text-blue-100">${p.gp}</td>
-              <td class="py-3 px-3 text-center font-mono text-blue-200 hidden sm:table-cell">${p.fg2}</td>
-              <td class="py-3 px-3 text-center font-mono ${activeLeaderCategory === 'tpm' ? 'font-extrabold text-ph-gold text-base' : 'text-blue-100'}">${p.tpm}</td>
-              <td class="py-3 px-3 text-center font-mono text-blue-200 hidden sm:table-cell">${p.ftm}</td>
-              <td class="py-3 px-3 text-right font-mono ${activeLeaderCategory === 'pts' ? 'font-extrabold text-ph-gold text-base' : 'text-white'}">${p.pts}</td>
-              <td class="py-3 px-4 text-right font-mono font-bold text-white">${perGame}</td>
-            </tr>
-          `;
+          thead.innerHTML = `<th class="py-3 px-4 w-12">Rank</th><th class="py-3 px-4">Player</th><th class="py-3 px-3 text-center">GP</th><th class="py-3 px-3 text-center hidden sm:table-cell">2PM</th><th class="py-3 px-3 text-center">3PM</th><th class="py-3 px-3 text-center hidden sm:table-cell">FTM</th><th class="py-3 px-3 text-right">PTS</th><th class="py-3 px-4 text-right">${meta.perGameLabel}</th>`;
         } else {
-          return `
-            <tr class="hover:bg-ph-blue/30 transition">
-              <td class="py-3 px-4 font-mono font-bold ${idx < 3 ? 'text-ph-gold' : 'text-blue-200'}">${idx < 3 ? '★ ' : ''}#${idx + 1}</td>
-              <td class="py-3 px-4">
-                <div class="font-bold text-white">${p.name} ${divTag}</div>
-                <div class="text-[11px] font-mono text-blue-200">${p.team}</div>
-              </td>
-              <td class="py-3 px-3 text-center font-mono text-blue-100">${p.gp}</td>
-              <td class="py-3 px-3 text-center font-mono text-blue-200 hidden sm:table-cell">${p.pts}</td>
-              <td class="py-3 px-3 text-right font-mono font-extrabold text-base text-ph-gold">${p[activeLeaderCategory]}</td>
-              <td class="py-3 px-4 text-right font-mono font-bold text-white">${perGame}</td>
-            </tr>
-          `;
+          thead.innerHTML = `<th class="py-3 px-4 w-12">Rank</th><th class="py-3 px-4">Player</th><th class="py-3 px-3 text-center">Eligible GP</th><th class="py-3 px-3 text-center hidden sm:table-cell">PTS</th><th class="py-3 px-3 text-right font-bold text-white">Total ${meta.label}</th><th class="py-3 px-4 text-right">${meta.perGameLabel}</th>`;
         }
-      }).join('');
+      }
+
+      if (tbody) {
+        tbody.innerHTML = sorted.slice(0, 15).map((p, idx) => {
+          const perGame = (p[activeLeaderCategory] / p.gp).toFixed(1);
+          const divTag = p.div === '35+' ? `<span class="ml-1.5 text-[10px] font-mono px-1.5 py-0.5 rounded bg-ph-red text-white border border-ph-gold/40">35+</span>` : `<span class="ml-1.5 text-[10px] font-mono px-1.5 py-0.5 rounded bg-ph-blue text-white border border-ph-gold/40">OPEN</span>`;
+          if (activeLeaderCategory === 'pts' || activeLeaderCategory === 'tpm') {
+            return `<tr class="hover:bg-ph-blue/30 transition"><td class="py-3 px-4 font-mono font-bold ${idx < 3 ? 'text-ph-gold' : 'text-blue-200'}">${idx < 3 ? '★ ' : ''}#${idx + 1}</td><td class="py-3 px-4"><div class="font-bold text-white">${p.name} ${divTag}</div><div class="text-[11px] font-mono text-blue-200">${p.team}</div></td><td class="py-3 px-3 text-center font-mono text-blue-100">${p.gp}</td><td class="py-3 px-3 text-center font-mono text-blue-200 hidden sm:table-cell">${p.fg2}</td><td class="py-3 px-3 text-center font-mono ${activeLeaderCategory === 'tpm' ? 'font-extrabold text-ph-gold text-base' : 'text-blue-100'}">${p.tpm}</td><td class="py-3 px-3 text-center font-mono text-blue-200 hidden sm:table-cell">${p.ftm}</td><td class="py-3 px-3 text-right font-mono ${activeLeaderCategory === 'pts' ? 'font-extrabold text-ph-gold text-base' : 'text-white'}">${p.pts}</td><td class="py-3 px-4 text-right font-mono font-bold text-white">${perGame}</td></tr>`;
+          } else {
+            return `<tr class="hover:bg-ph-blue/30 transition"><td class="py-3 px-4 font-mono font-bold ${idx < 3 ? 'text-ph-gold' : 'text-blue-200'}">${idx < 3 ? '★ ' : ''}#${idx + 1}</td><td class="py-3 px-4"><div class="font-bold text-white">${p.name} ${divTag}</div><div class="text-[11px] font-mono text-blue-200">${p.team}</div></td><td class="py-3 px-3 text-center font-mono text-blue-100">${p.gp}</td><td class="py-3 px-3 text-center font-mono text-blue-200 hidden sm:table-cell">${p.pts}</td><td class="py-3 px-3 text-right font-mono font-extrabold text-base text-ph-gold">${p[activeLeaderCategory]}</td><td class="py-3 px-4 text-right font-mono font-bold text-white">${perGame}</td></tr>`;
+          }
+        }).join('');
+      }
     }
 
-    // =========================================================================
-    // SCOREBOARD TICKER, STANDINGS & GAMES LOG
-    // =========================================================================
     function renderTicker() {
       const container = document.getElementById('ticker-container');
+      if (!container) return;
       const latestGames = BPBL_DATA.games.filter(g => g.date === "24/10/2026");
       container.innerHTML = latestGames.map(g => {
         const homeWon = g.homeScore > g.awayScore;
         const divBadge = g.division.includes("35+") ? "35+" : "OPEN";
-        const badgeStyle = g.division.includes("35+")
-          ? "bg-ph-red text-white border-ph-gold/50"
-          : "bg-ph-blue text-white border-ph-gold/50";
-        return `
-          <div class="px-3.5 py-1 shrink-0 flex items-center gap-3 text-xs">
-            <span class="font-mono text-[10px] px-1.5 py-0.5 rounded font-bold border ${badgeStyle}">${divBadge}</span>
-            <div class="space-y-0.5">
-              <div class="flex items-center justify-between gap-4 ${homeWon ? 'text-ph-gold font-bold' : 'text-blue-200'}">
-                <span>${g.home}</span>
-                <span class="font-mono">${g.homeScore}</span>
-              </div>
-              <div class="flex items-center justify-between gap-4 ${!homeWon ? 'text-ph-gold font-bold' : 'text-blue-200'}">
-                <span>${g.away}</span>
-                <span class="font-mono">${g.awayScore}</span>
-              </div>
-            </div>
-          </div>
-        `;
+        const badgeStyle = g.division.includes("35+") ? "bg-ph-red text-white border-ph-gold/50" : "bg-ph-blue text-white border-ph-gold/50";
+        return `<div class="px-3.5 py-1 shrink-0 flex items-center gap-3 text-xs"><span class="font-mono text-[10px] px-1.5 py-0.5 rounded font-bold border ${badgeStyle}">${divBadge}</span><div class="space-y-0.5"><div class="flex items-center justify-between gap-4 ${homeWon ? 'text-ph-gold font-bold' : 'text-blue-200'}"><span>${g.home}</span><span class="font-mono">${g.homeScore}</span></div><div class="flex items-center justify-between gap-4 ${!homeWon ? 'text-ph-gold font-bold' : 'text-blue-200'}"><span>${g.away}</span><span class="font-mono">${g.awayScore}</span></div></div></div>`;
       }).join('');
     }
 
@@ -797,27 +630,25 @@
       currentStandingsDiv = div;
       const btnOpen = document.getElementById('btn-standings-open');
       const btn35 = document.getElementById('btn-standings-35plus');
-
       if (div === 'open') {
-        btnOpen.className = "px-4 py-1.5 rounded-lg text-xs font-extrabold uppercase tracking-wider transition bg-ph-blue text-white border border-ph-gold shadow";
-        btn35.className = "px-4 py-1.5 rounded-lg text-xs font-extrabold uppercase tracking-wider transition text-blue-200 hover:text-white";
+        if (btnOpen) btnOpen.className = "px-4 py-1.5 rounded-lg text-xs font-extrabold uppercase tracking-wider transition bg-ph-blue text-white border border-ph-gold shadow";
+        if (btn35) btn35.className = "px-4 py-1.5 rounded-lg text-xs font-extrabold uppercase tracking-wider transition text-blue-200 hover:text-white";
       } else {
-        btn35.className = "px-4 py-1.5 rounded-lg text-xs font-extrabold uppercase tracking-wider transition bg-ph-red text-white border border-ph-gold shadow";
-        btnOpen.className = "px-4 py-1.5 rounded-lg text-xs font-extrabold uppercase tracking-wider transition text-blue-200 hover:text-white";
+        if (btn35) btn35.className = "px-4 py-1.5 rounded-lg text-xs font-extrabold uppercase tracking-wider transition bg-ph-red text-white border border-ph-gold shadow";
+        if (btnOpen) btnOpen.className = "px-4 py-1.5 rounded-lg text-xs font-extrabold uppercase tracking-wider transition text-blue-200 hover:text-white";
       }
       renderStandings();
     }
 
     function renderStandings() {
       const tbody = document.getElementById('standings-tbody');
+      if (!tbody) return;
       const rows = currentStandingsDiv === 'open' ? BPBL_DATA.standings.open : BPBL_DATA.standings.baliklaro35;
-
       tbody.innerHTML = rows.map(r => {
         const pct = (r.w / r.gp).toFixed(3).replace(/^0/, '');
         const ppg = (r.pf / r.gp).toFixed(1);
         const diffStr = r.diff > 0 ? `+${r.diff}` : `${r.diff}`;
         const diffColor = r.diff > 0 ? 'text-ph-gold' : (r.diff < 0 ? 'text-rose-400' : 'text-blue-100');
-
         let badge = '';
         if (currentStandingsDiv === 'open') {
           if (r.w === 5) badge = `<span class="px-2.5 py-0.5 text-[10px] font-mono uppercase rounded-full bg-ph-gold text-ph-navy font-extrabold">☀ Unbeaten 5-0</span>`;
@@ -828,29 +659,17 @@
           else if (r.rank <= 6) badge = `<span class="px-2.5 py-0.5 text-[10px] font-mono uppercase rounded-full bg-ph-red text-white border border-ph-gold/50 font-bold">★ Contender</span>`;
           else badge = `<span class="px-2.5 py-0.5 text-[10px] font-mono uppercase rounded-full bg-[#030917] text-blue-200 border border-ph-blue/50">Chasing</span>`;
         }
-
-        return `
-          <tr class="hover:bg-ph-blue/30 transition">
-            <td class="py-3.5 px-4 font-mono font-bold ${r.rank <= 3 ? 'text-ph-gold' : 'text-blue-200'}">#${r.rank}</td>
-            <td class="py-3.5 px-4 font-bold text-white">${r.team}</td>
-            <td class="py-3.5 px-3 text-center font-mono text-blue-100">${r.gp}</td>
-            <td class="py-3.5 px-3 text-center font-mono font-bold text-white">${r.w}</td>
-            <td class="py-3.5 px-3 text-center font-mono text-blue-200">${r.l}</td>
-            <td class="py-3.5 px-3 text-center font-mono text-blue-200 hidden sm:table-cell">${pct}</td>
-            <td class="py-3.5 px-3 text-right font-mono text-blue-100">${r.pf}</td>
-            <td class="py-3.5 px-3 text-right font-mono text-blue-200">${r.pa}</td>
-            <td class="py-3.5 px-3 text-right font-mono text-white">${ppg}</td>
-            <td class="py-3.5 px-4 text-right font-mono font-extrabold ${diffColor}">${diffStr}</td>
-            <td class="py-3.5 px-4 text-center hidden md:table-cell">${badge}</td>
-          </tr>
-        `;
+        return `<tr class="hover:bg-ph-blue/30 transition"><td class="py-3.5 px-4 font-mono font-bold ${r.rank <= 3 ? 'text-ph-gold' : 'text-blue-200'}">#${r.rank}</td><td class="py-3.5 px-4 font-bold text-white">${r.team}</td><td class="py-3.5 px-3 text-center font-mono text-blue-100">${r.gp}</td><td class="py-3.5 px-3 text-center font-mono font-bold text-white">${r.w}</td><td class="py-3.5 px-3 text-center font-mono text-blue-200">${r.l}</td><td class="py-3.5 px-3 text-center font-mono text-blue-200 hidden sm:table-cell">${pct}</td><td class="py-3.5 px-3 text-right font-mono text-blue-100">${r.pf}</td><td class="py-3.5 px-3 text-right font-mono text-blue-200">${r.pa}</td><td class="py-3.5 px-3 text-right font-mono text-white">${ppg}</td><td class="py-3.5 px-4 text-right font-mono font-extrabold ${diffColor}">${diffStr}</td><td class="py-3.5 px-4 text-center hidden md:table-cell">${badge}</td></tr>`;
       }).join('');
     }
 
     function renderGames() {
-      const dateVal = document.getElementById('filter-date').value;
-      const divVal = document.getElementById('filter-division').value;
-      const searchVal = document.getElementById('filter-team').value.trim().toLowerCase();
+      const dateEl = document.getElementById('filter-date');
+      const divEl = document.getElementById('filter-division');
+      const searchEl = document.getElementById('filter-team');
+      const dateVal = dateEl ? dateEl.value : 'ALL';
+      const divVal = divEl ? divEl.value : 'ALL';
+      const searchVal = searchEl ? searchEl.value.trim().toLowerCase() : '';
 
       const filtered = BPBL_DATA.games.filter(g => {
         const matchDate = dateVal === 'ALL' || g.date === dateVal;
@@ -860,7 +679,8 @@
       });
 
       const grid = document.getElementById('games-grid');
-      if (filtered.length === 0) {
+      if (!grid) return;
+      if (!filtered.length) {
         grid.innerHTML = `<div class="col-span-full ph-card border border-ph-blue/60 rounded-xl p-8 text-center text-blue-200">No games match your current filter.</div>`;
         return;
       }
@@ -868,32 +688,10 @@
       grid.innerHTML = filtered.map(g => {
         const homeWon = g.homeScore > g.awayScore;
         const is35 = g.division.includes('35+');
-        return `
-          <div class="ph-card border ${is35 ? 'border-ph-red/60' : 'border-ph-blue/60'} hover:border-ph-gold rounded-xl p-4 transition flex flex-col justify-between gap-3 shadow-lg">
-            <div class="flex items-center justify-between text-[11px] font-mono">
-              <span class="px-2.5 py-0.5 rounded font-bold text-white ${is35 ? 'bg-ph-red border border-ph-gold/40' : 'bg-ph-blue border border-ph-gold/40'}">${g.division}</span>
-              <span class="text-ph-gold font-bold">${g.date}</span>
-            </div>
-            <div class="space-y-2 my-1">
-              <div class="flex items-center justify-between ${homeWon ? 'text-white font-extrabold' : 'text-blue-200'}">
-                <span class="text-sm truncate pr-2">${homeWon ? '★ ' : ''}${g.home}</span>
-                <span class="font-mono text-xl ${homeWon ? 'text-ph-gold' : ''}">${g.homeScore}</span>
-              </div>
-              <div class="flex items-center justify-between ${!homeWon ? 'text-white font-extrabold' : 'text-blue-200'}">
-                <span class="text-sm truncate pr-2">${!homeWon ? '★ ' : ''}${g.away}</span>
-                <span class="font-mono text-xl ${!homeWon ? 'text-ph-gold' : ''}">${g.awayScore}</span>
-              </div>
-            </div>
-            <div class="pt-2 border-t border-white/15 flex items-center justify-between text-[11px] text-blue-200 font-mono">
-              <span class="text-white font-bold">FINAL</span>
-              <span>Margin: ${Math.abs(g.homeScore - g.awayScore)} pts</span>
-            </div>
-          </div>
-        `;
+        return `<div class="ph-card border ${is35 ? 'border-ph-red/60' : 'border-ph-blue/60'} hover:border-ph-gold rounded-xl p-4 transition flex flex-col justify-between gap-3 shadow-lg"><div class="flex items-center justify-between text-[11px] font-mono"><span class="px-2.5 py-0.5 rounded font-bold text-white ${is35 ? 'bg-ph-red border border-ph-gold/40' : 'bg-ph-blue border border-ph-gold/40'}">${g.division}</span><span class="text-ph-gold font-bold">${g.date}</span></div><div class="space-y-2 my-1"><div class="flex items-center justify-between ${homeWon ? 'text-white font-extrabold' : 'text-blue-200'}"><span class="text-sm truncate pr-2">${homeWon ? '★ ' : ''}${g.home}</span><span class="font-mono text-xl ${homeWon ? 'text-ph-gold' : ''}">${g.homeScore}</span></div><div class="flex items-center justify-between ${!homeWon ? 'text-white font-extrabold' : 'text-blue-200'}"><span class="text-sm truncate pr-2">${!homeWon ? '★ ' : ''}${g.away}</span><span class="font-mono text-xl ${!homeWon ? 'text-ph-gold' : ''}">${g.awayScore}</span></div></div><div class="pt-2 border-t border-white/15 flex items-center justify-between text-[11px] text-blue-200 font-mono"><span class="text-white font-bold">FINAL</span><span>Margin: ${Math.abs(g.homeScore - g.awayScore)} pts</span></div></div>`;
       }).join('');
     }
 
-    // Initialize Page
     renderTicker();
     renderLeaderboards();
     renderStandings();
