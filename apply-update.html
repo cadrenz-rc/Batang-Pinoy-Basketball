@@ -8,9 +8,9 @@ if(!s.includes('id="standings"')||!s.includes('id="leaders"')||!s.includes('id="
 s=s.replace(/<script\s+src=["']bpbl-tabs\.js["']\s+defer\s*><\/script>\s*/gi,'');
 s=s.replace(/<script\s+defer\s+src=["']bpbl-tabs\.js["']\s*><\/script>\s*/gi,'');
 // Restore the first header logo to the uploaded local file, keeping existing fallback.
-s=s.replace(/(<img\b[^>]*\bid=["']bpbl-header-logo["'][^>]*\bsrc=["'])[^"']+(["'])/i,'$11000015325.jpg$2');
+s=s.replace(/(<img\b[^>]*\bid=["']bpbl-header-logo["'][^>]*\bsrc=["'])[^"']+(["'])/i,(_match,begin,end)=>begin+'1000015325.jpg'+end);
 // If src appears before id in another version, leave the original existing logo path untouched.
-s=s.replace('</body>','  <script src="bpbl-tabs.js" defer></script>\n</body>');
+s=s.replace('</body>','  <script src="bpbl-tabs.js" defer><\/script>\n</body>');
 const blob=new Blob([s],{type:'text/html;charset=utf-8'});const a=document.createElement('a');
 a.href=URL.createObjectURL(blob);a.download='index.html';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1000);
 status.textContent='Fixed index.html downloaded. Upload it together with bpbl-tabs.js and 1000015325.jpg to GitHub.';
