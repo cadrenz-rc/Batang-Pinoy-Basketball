@@ -1,0 +1,18 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>BPBL Site Update Installer</title><style>body{font:16px system-ui;margin:0;background:#06132e;color:white}main{max-width:700px;margin:4rem auto;padding:2rem;background:#10234c;border-radius:18px}button{background:#fcd116;padding:14px 20px;font-weight:700;border:0;border-radius:8px;cursor:pointer;margin-top:18px}input{display:block;margin-top:16px}p{line-height:1.6}code{color:#ffe57d}</style></head><body><main><h1>BPBL — Top Tabs & Logo</h1><p>Choose the current <code>index.html</code> downloaded from GitHub. This installer fixes the misplaced script, sets the uploaded logo, and activates top navigation without modifying league stats.</p><input type="file" id="file" accept=".html,text/html"><button id="go">Create fixed index.html</button><p id="status"></p></main><script>
+document.getElementById('go').onclick=async()=>{
+const status=document.getElementById('status');const f=document.getElementById('file').files[0];
+if(!f){status.textContent='Select your existing index.html first.';return;}
+let s=await f.text();
+if(!s.includes('id="standings"')||!s.includes('id="leaders"')||!s.includes('id="results"')){status.textContent='This does not appear to be the BPBL Season 9 index.html.';return;}
+// Remove any misplaced references, including the one accidentally pasted inside a style tag.
+s=s.replace(/<script\s+src=["']bpbl-tabs\.js["']\s+defer\s*><\/script>\s*/gi,'');
+s=s.replace(/<script\s+defer\s+src=["']bpbl-tabs\.js["']\s*><\/script>\s*/gi,'');
+// Restore the first header logo to the uploaded local file, keeping existing fallback.
+s=s.replace(/(<img\b[^>]*\bid=["']bpbl-header-logo["'][^>]*\bsrc=["'])[^"']+(["'])/i,'$11000015325.jpg$2');
+// If src appears before id in another version, leave the original existing logo path untouched.
+s=s.replace('</body>','  <script src="bpbl-tabs.js" defer></script>\n</body>');
+const blob=new Blob([s],{type:'text/html;charset=utf-8'});const a=document.createElement('a');
+a.href=URL.createObjectURL(blob);a.download='index.html';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+status.textContent='Fixed index.html downloaded. Upload it together with bpbl-tabs.js and 1000015325.jpg to GitHub.';
+};
+</script></body></html>
