@@ -1,0 +1,306 @@
+```html
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BPBL Season 9 | Batang Pinoy Basketball League — Official Hub</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Teko:wght@500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Teko', 'sans-serif'],
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            ph: {
+              blue: '#0038A8',
+              crest: '#0B5394',
+              navy: '#040D21',
+              red: '#CE1126',
+              gold: '#FCD116',
+              orange: '#E66C1F',
+              white: '#FFFFFF',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #040D21;
+      color: #FFFFFF;
+      background-image: 
+        radial-gradient(at 0% 10%, rgba(0, 56, 168, 0.60) 0px, transparent 50%),
+        radial-gradient(at 100% 10%, rgba(206, 17, 38, 0.50) 0px, transparent 50%),
+        radial-gradient(at 50% 0%, rgba(252, 209, 22, 0.14) 0px, transparent 45%);
+      background-attachment: fixed;
+    }
+    .ph-flag-ribbon {
+      background: linear-gradient(90deg, #0038A8 0%, #0038A8 42%, #FCD116 42%, #FCD116 58%, #CE1126 58%, #CE1126 100%);
+    }
+    .ph-card {
+      background: linear-gradient(145deg, rgba(0, 42, 125, 0.55) 0%, rgba(5, 14, 34, 0.94) 55%, rgba(110, 10, 22, 0.40) 100%);
+    }
+    .season9-text {
+      background: linear-gradient(180deg, #FFE066 0%, #F59E0B 55%, #B45309 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .scrollbar-none::-webkit-scrollbar { display: none; }
+    .scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="font-sans antialiased selection:bg-ph-gold selection:text-ph-navy min-h-screen flex flex-col">
+
+  <!-- TOP FLAG RIBBON -->
+  <div class="h-1.5 w-full ph-flag-ribbon sticky top-0 z-50"></div>
+
+  <!-- SCOREBOARD TICKER -->
+  <div class="bg-[#030917] border-b border-ph-blue/60 sticky top-1.5 z-50 shadow-lg">
+    <div class="max-w-7xl mx-auto flex items-center">
+      <div class="bg-ph-red px-4 py-2.5 flex items-center gap-2 shrink-0 border-r-2 border-ph-gold">
+        <span class="w-2.5 h-2.5 rounded-full bg-ph-gold animate-pulse"></span>
+        <span class="font-display text-lg tracking-wider uppercase font-bold text-white leading-none">SEASON 9 • OCT 24</span>
+      </div>
+      <div id="ticker-container" class="flex items-center overflow-x-auto scrollbar-none divide-x divide-ph-blue/40 py-1.5 px-2"></div>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="bg-gradient-to-r from-ph-blue via-[#05153B] to-ph-red border-b-2 border-ph-gold sticky top-[47px] z-40 shadow-2xl">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-22 py-2.5 flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <a href="#" class="relative w-16 h-16 sm:w-18 sm:h-18 rounded-full p-0.5 bg-gradient-to-tr from-ph-blue via-white to-ph-red shadow-xl shadow-black/60 shrink-0 group">
+          <img 
+            id="bpbl-header-logo"
+            src="1000015325.jpg" 
+            alt="Batang Pinoy Basketball League Season 9 Logo" 
+            class="w-full h-full rounded-full object-cover border-2 border-white"
+            onerror="if(this.src.endsWith('1000015325.jpg')){this.src='logo.jpg';}else{this.style.display='none';document.getElementById('bpbl-svg-fallback').classList.remove('hidden');}"
+          />
+          <svg id="bpbl-svg-fallback" class="hidden w-full h-full rounded-full" viewBox="0 0 120 120">
+            <circle cx="60" cy="60" r="58" fill="#0B5394" stroke="#FFFFFF" stroke-width="3"/>
+            <circle cx="60" cy="60" r="38" fill="#FFFFFF" stroke="#040D21" stroke-width="2"/>
+            <path d="M60 25 L52 38 L42 35 L46 48 L34 50 L42 60 L38 65 L60 65 Z" fill="#CE1126"/>
+            <path d="M60 25 L66 42 L74 32 L70 46 L84 42 L73 53 L86 54 L73 60 L84 65 L60 65 Z" fill="#FCD116" stroke="#991B1B" stroke-width="0.8"/>
+            <circle cx="60" cy="54" r="15" fill="#E66C1F" stroke="#1E293B" stroke-width="1.8"/>
+            <path d="M45 54 Q60 48 75 54 M60 39 L60 69 M49 43 Q60 54 49 65 M71 43 Q60 54 71 65" fill="none" stroke="#1E293B" stroke-width="1.5"/>
+            <rect x="40" y="69" width="40" height="3" rx="1.5" fill="#D97706" stroke="#1E293B" stroke-width="1"/>
+            <path d="M43 72 L48 92 L72 92 L77 72" fill="none" stroke="#E2E8F0" stroke-width="1.8" stroke-dasharray="3,2"/>
+            <polygon points="60,4 63,11 70,11 64,15 66,22 60,18 54,22 56,15 50,11 57,11" fill="#FCD116" stroke="#FFFFFF" stroke-width="1"/>
+          </svg>
+        </a>
+
+        <div>
+          <div class="flex flex-wrap items-center gap-2.5">
+            <h1 class="font-display text-2xl sm:text-4xl font-bold tracking-wide text-white leading-none drop-shadow">
+              BATANG PINOY BASKETBALL LEAGUE
+            </h1>
+            <span class="inline-flex items-center gap-1 bg-gradient-to-r from-ph-gold via-amber-400 to-orange-500 text-ph-navy font-display text-sm sm:text-base px-3 py-0.5 rounded-full uppercase font-extrabold tracking-wider shadow-lg border border-white">
+              ★ SEASON 9 ★
+            </span>
+          </div>
+          <p class="text-xs text-blue-100 font-medium mt-0.5">
+            Tip-Off Sept 12 • Heading Into Week 6 • Official iTala Standings, Leaders & Results Hub
+          </p>
+        </div>
+      </div>
+
+      <nav class="hidden lg:flex items-center gap-4 text-sm font-bold text-white">
+        <a href="https://www.facebook.com/share/1EcopCUiT5/" target="_blank" rel="noopener" class="bg-ph-gold hover:bg-yellow-300 text-ph-navy px-4 py-2 rounded-lg text-xs font-extrabold uppercase tracking-wider transition shadow-lg">
+          Official Facebook ↗
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- TAB NAVIGATION BAR -->
+  <div class="bg-[#030917] border-b border-ph-blue/50 sticky top-[111px] z-30 shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-2 overflow-x-auto scrollbar-none py-2.5">
+      <button onclick="switchTab('overview')" id="tab-btn-overview" class="px-5 py-2 rounded-xl text-xs sm:text-sm font-extrabold uppercase tracking-wider transition bg-ph-blue text-white border border-ph-gold shadow">
+        🏠 Home & Storylines
+      </button>
+      <button onclick="switchTab('standings')" id="tab-btn-standings" class="px-5 py-2 rounded-xl text-xs sm:text-sm font-extrabold uppercase tracking-wider transition text-blue-200 hover:text-white bg-[#071536] border border-ph-blue/50">
+        🏆 Standings
+      </button>
+      <button onclick="switchTab('leaders')" id="tab-btn-leaders" class="px-5 py-2 rounded-xl text-xs sm:text-sm font-extrabold uppercase tracking-wider transition text-blue-200 hover:text-white bg-[#071536] border border-ph-blue/50">
+        ⭐ League Leaders
+      </button>
+      <button onclick="switchTab('matchups')" id="tab-btn-matchups" class="px-5 py-2 rounded-xl text-xs sm:text-sm font-extrabold uppercase tracking-wider transition text-blue-200 hover:text-white bg-[#071536] border border-ph-blue/50">
+        📅 Previous Matchups (50 Games)
+      </button>
+    </div>
+  </div>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12 flex-1 w-full">
+
+    <!-- TAB 1: OVERVIEW & STORYLINES -->
+    <section id="tab-overview" class="space-y-6">
+      <div class="flex items-center justify-between border-b-2 border-ph-gold/40 pb-2">
+        <div class="flex items-center gap-2.5">
+          <span class="text-ph-gold text-xl leading-none">☀</span>
+          <h2 class="font-display text-3xl uppercase tracking-wide text-white">
+            BPBL <span class="season9-text">Season 9</span> • Heading Into Week 6 Storylines
+          </h2>
+        </div>
+        <div class="flex items-center gap-1.5 text-xs font-mono text-ph-gold">
+          <span>★ ★ ★</span>
+          <span class="text-blue-200">50 GAMES PLAYED SINCE SEPT 12</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <div class="lg:col-span-7 bg-gradient-to-br from-ph-blue via-[#061844] to-ph-red rounded-2xl border-2 border-ph-gold/80 p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden shadow-2xl">
+          <div class="space-y-4 relative z-10">
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="bg-ph-red border border-white/30 text-white text-[11px] font-extrabold uppercase tracking-widest px-3 py-1 rounded shadow">
+                Season 9 • Open Division Headline
+              </span>
+              <span class="bg-ph-gold text-ph-navy text-xs font-mono font-extrabold px-2.5 py-0.5 rounded">
+                ★ THREE UNBEATEN GIANTS AT 5–0
+              </span>
+            </div>
+            <h3 class="font-display text-4xl sm:text-5xl font-bold uppercase leading-[0.95] text-white drop-shadow">
+              Unbeaten Collision Course: Bambhorats Knights, JMC Alliance & Haides X Journey Hit 5–0
+            </h3>
+            <p class="text-blue-50 text-sm sm:text-base leading-relaxed">
+              Since Season 9 tipped off on September 12, three undefeated Open Division powerhouses have refused to blink. <strong class="text-ph-gold">Bambhorats Knights (5–0, +164)</strong> own the league's most explosive offense at 86.2 PPG behind balanced playmakers <strong>Gerard Pamintuan</strong> (61 PTS, 21 REB, 13 AST) and <strong>Maestre</strong> (60 PTS, 15 AST). Right behind them, <strong class="text-ph-gold">JMC Alliance (5–0, +141)</strong> boasts a lockdown 40.6 PAPG defense, while <strong class="text-ph-gold">Haides X Journey (5–0, +89)</strong> is powered by MVP candidate <strong>Brent Padilla</strong> (76 PTS, co-league-best 34 REB) and league assist/block king <strong>Gel Santiago</strong> (59 PTS, 31 REB, 18 AST, 5 BLK).
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-6 mt-6 border-t border-white/20 relative z-10">
+            <div class="bg-ph-navy/85 p-3.5 rounded-xl border-l-4 border-ph-gold">
+              <div class="text-[11px] font-mono text-ph-gold uppercase font-bold">★ #1 Bambhorats Knights</div>
+              <div class="font-display text-3xl text-white font-bold">5-0 • +164</div>
+              <div class="text-[11px] text-blue-200">431 PF (86.2 PPG)</div>
+            </div>
+            <div class="bg-ph-navy/85 p-3.5 rounded-xl border-l-4 border-white">
+              <div class="text-[11px] font-mono text-white uppercase font-bold">★ #2 JMC Alliance</div>
+              <div class="font-display text-3xl text-white font-bold">5-0 • +141</div>
+              <div class="text-[11px] text-blue-200">203 PA (40.6 PAPG)</div>
+            </div>
+            <div class="bg-ph-navy/85 p-3.5 rounded-xl border-l-4 border-ph-red">
+              <div class="text-[11px] font-mono text-rose-300 uppercase font-bold">★ #3 Haides X Journey</div>
+              <div class="font-display text-3xl text-white font-bold">5-0 • +89</div>
+              <div class="text-[11px] text-blue-200">Padilla (76p) & Santiago (18a)</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5 flex flex-col justify-between gap-4">
+          <div class="ph-card rounded-xl border-l-4 border-l-ph-gold border border-ph-blue/50 p-5 shadow-lg">
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="text-[11px] font-mono uppercase font-extrabold text-ph-gold">☀ Season 9 Scoring King</span>
+              <span class="text-xs font-mono text-blue-200">96 PTS in 4 Tracked Games</span>
+            </div>
+            <h4 class="font-display text-2xl uppercase font-bold text-white leading-tight">
+              Silent Threat's Jerome Verchez Leads All BPBL Scorers With 96 Points
+            </h4>
+            <p class="text-xs sm:text-sm text-blue-100 mt-1.5 leading-relaxed">
+              <strong>Jerome Verchez</strong> has been an unstoppable bucket-getter for <strong>Silent Threat (3–2)</strong>, pacing the entire league with <strong>96 recorded points (24.0 PPG)</strong> on 27 two-pointers, 9 triples, and 15 free throws.
+            </p>
+          </div>
+
+          <div class="ph-card rounded-xl border-l-4 border-l-ph-red border border-ph-blue/50 p-5 shadow-lg">
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="text-[11px] font-mono uppercase font-extrabold text-rose-300">★ Baliklaro 35+ Logjam</span>
+              <span class="text-xs font-mono text-blue-200">4-Way Tie at 3–1</span>
+            </div>
+            <h4 class="font-display text-2xl uppercase font-bold text-white leading-tight">
+              Bernardino (20 3PM) & Sadornas (34 REB) Lift Salty Crew Into 4-Way Tie at 3–1
+            </h4>
+            <p class="text-xs sm:text-sm text-blue-100 mt-1.5 leading-relaxed">
+              Splash king <strong>Edward Bernardino</strong> (73 PTS, league-high <strong>20 3PM</strong>) and paint beast <strong>Paul Sadornas</strong> (70 PTS, co-league-high <strong>34 REB</strong>) powered Salty Crew 35+.
+            </p>
+          </div>
+
+          <div class="ph-card rounded-xl border-l-4 border-l-ph-blue border border-ph-blue/50 p-5 shadow-lg">
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="text-[11px] font-mono uppercase font-extrabold text-sky-300">★ Defensive Lockdown</span>
+              <span class="text-xs font-mono text-blue-200">Wild Tribe at 4–1</span>
+            </div>
+            <h4 class="font-display text-2xl uppercase font-bold text-white leading-tight">
+              Ryan Cabico (16 STL) & Alvin Domenden (31 REB) Anchor 4–1 Wild Tribe
+            </h4>
+            <p class="text-xs sm:text-sm text-blue-100 mt-1.5 leading-relaxed">
+              League steals leader <strong>Ryan Cabico</strong> (16 STL, 12 AST, 3 BLK) and two-way force <strong>Alvin Domenden</strong> (65 PTS, 31 REB, 10 STL) have Wild Tribe sitting at 4–1 (+55).
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: STANDINGS -->
+    <section id="tab-standings" class="space-y-4 hidden">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b-2 border-ph-gold/40 pb-3">
+        <div>
+          <div class="flex items-center gap-2.5">
+            <span class="w-2 h-6 bg-ph-blue border border-ph-gold rounded-sm"></span>
+            <h2 class="font-display text-3xl uppercase tracking-wide text-white">Season 9 Official Division Standings</h2>
+          </div>
+          <p class="text-xs text-blue-200 mt-0.5">Ranked by Wins (W), Point Differential (+/-), and Points For (PF) through Oct 24, 2026</p>
+        </div>
+
+        <div class="inline-flex bg-[#030917] p-1 rounded-xl border border-ph-blue/60 self-start">
+          <button onclick="switchStandingsDivision('open')" id="btn-standings-open" class="px-4 py-1.5 rounded-lg text-xs font-extrabold uppercase tracking-wider transition bg-ph-blue text-white border border-ph-gold shadow">BPBL Open Division (14)</button>
+          <button onclick="switchStandingsDivision('35plus')" id="btn-standings-35plus" class="px-4 py-1.5 rounded-lg text-xs font-extrabold uppercase tracking-wider transition text-blue-200 hover:text-white">Baliklaro 35+ (7)</button>
+        </div>
+      </div>
+
+      <div class="ph-card rounded-2xl border border-ph-blue/60 overflow-hidden shadow-2xl">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-gradient-to-r from-ph-blue via-[#061A48] to-ph-red border-b border-ph-gold/50 text-[11px] font-mono uppercase text-ph-gold">
+                <th class="py-3.5 px-4 w-14">Rank</th>
+                <th class="py-3.5 px-4">Team</th>
+                <th class="py-3.5 px-3 text-center">GP</th>
+                <th class="py-3.5 px-3 text-center">W</th>
+                <th class="py-3.5 px-3 text-center">L</th>
+                <th class="py-3.5 px-3 text-center hidden sm:table-cell">PCT</th>
+                <th class="py-3.5 px-3 text-right">PF</th>
+                <th class="py-3.5 px-3 text-right">PA</th>
+                <th class="py-3.5 px-3 text-right">PPG</th>
+                <th class="py-3.5 px-4 text-right">+/-</th>
+                <th class="py-3.5 px-4 text-center hidden md:table-cell">Status / Tier</th>
+              </tr>
+            </thead>
+            <tbody id="standings-tbody" class="divide-y divide-ph-blue/30 text-sm"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: LEAGUE LEADERS -->
+    <section id="tab-leaders" class="space-y-5 hidden">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b-2 border-ph-gold/40 pb-3">
+        <div>
+          <div class="flex items-center gap-2.5">
+            <span class="text-ph-gold text-xl leading-none">★</span>
+            <h2 class="font-display text-3xl uppercase tracking-wide text-white">Season 9 Player Leaderboards</h2>
+          </div>
+          <p class="text-xs text-blue-200 mt-0.5">Filter by Category & Division • 86 of 100 Team Sides Tracked via iTala Mobile App</p>
+        </div>
+
+        <div class="inline-flex bg-[#030917] p-1 rounded-xl border border-ph-blue/60 self-start">
+          <button onclick="setLeaderDivision('ALL')" id="ldr-div-all" class="px-4 py-1.5 rounded-lg text-xs font-extrabold uppercase tracking-wider transition bg-ph-gold text-ph-navy shadow">☀ All BPBL</button>
+          <button onclick="setLeaderDivision('OPEN')" id="ldr-div-open" class="px-4 py-1.5 rounded-lg text-xs font-extrabold uppercase tracking-wider transition text-blue-200 hover:text-white">Open Division</button>
+          <button onclick="setLeaderDivision('35+')" id="ldr-div-35" class="px-4 py-1.5 rounded-lg text-xs font-extrabold uppercase tracking-wider transition text-blue-200 hover:text-white">Baliklaro 35+</button>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 overflow-x-auto scrollbar-none pb-1">
+        <button onclick="setLeaderCategory('pts')" id="cat-pts" class="px-4 py-2 rounded-xl text-xs font-extrabold uppercase tracking-wider transition bg-ph-blue text-white border-2 border-ph-gold shrink-0 shadow-lg">🔥 Scoring (PTS)</button>
+        <button onclick="setLeaderCategory('reb')" id="cat-reb" class="px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition bg-[#071536] text-blue-100 hover:text-white border border-ph-blue/50 shrink-0">💪 Rebounds (REB)</button>
+        <button onclick="setLeaderCategory('ast')" id="cat-ast" class="px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition bg-[#071536] text-blue-100 hover:text-white border border-ph-blue/50 shrink-0">🎯 Assists (AST)</button>
+        <button onclick="setLeaderCategory('stl')" id="cat-stl" class="px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition bg-[#071536] text-blue-100 hover:text-white border border-ph-blue/50 shrink-0">⚡ Steals (STL)</button>
+        <button onclick="setLeaderCategory('blk')" id="cat-blk" class="px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition bg-[#071536] text-blue-100 hover:text-white border border-ph-blue/50 shrink-0">🛡️ Blocks (BLK)</button>
+        <button onclick="setLeaderCategory('tpm')" id="cat-tpm" class="px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition bg-[#071536] text-blue-100 hover:text-white border border-ph-blue/50 shrink-0">🏹 3-Pointers Made (3PM)</button>
+      </di
