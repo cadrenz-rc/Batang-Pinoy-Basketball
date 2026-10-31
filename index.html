@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BPBL Season 9 | Batang Pinoy Basketball League — Official Hub</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Teko:wght@500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Teko', 'sans-serif'],
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            ph: {
+              blue: '#0038A8',      // Official Philippine Flag Royal Blue
+              crest: '#0B5394',     // BPBL Crest Blue
+              navy: '#040D21',      // Midnight Arena Backdrop
+              red: '#CE1126',       // Official Philippine Flag / Maple Leaf Crimson
+              gold: '#FCD116',      // Official Philippine Flag Star & Sun Gold
+              orange: '#E66C1F',    // Basketball & Season 9 Metallic Gold-Orange
+              white: '#FFFFFF',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #040D21;
+      color: #FFFFFF;
+      background-image: 
+        radial-gradient(at 0% 10%, rgba(0, 56, 168, 0.60) 0px, transparent 50%),
+        radial-gradient(at 100% 10%, rgba(206, 17, 38, 0.50) 0px, transparent 50%),
+        radial-gradient(at 50% 0%, rgba(252, 209, 22, 0.14) 0px, transparent 45%);
+      background-attachment: fixed;
+    }
+    .ph-flag-ribbon {
+      background: linear-gradient(90deg, #0038A8 0%, #0038A8 42%, #FCD116 42%, #FCD116 58%, #CE1126 58%, #CE1126 100%);
+    }
+    .ph-card {
+      background: linear-gradient(145deg, rgba(0, 42, 125, 0.55) 0%, rgba(5, 14, 34, 0.94) 55%, rgba(110, 10, 22, 0.40) 100%);
+    }
+    .season9-text {
+      background: linear-gradient(180deg, #FFE066 0%, #F59E0B 55%, #B45309 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .scrollbar-none::-webkit-scrollbar { display: none; }
+    .scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="font-sans antialiased selection:bg-ph-gold selection:text-ph-navy min-h-screen flex flex-col">
+
+  <!-- PHILIPPINE FLAG TOP RIBBON -->
+  <div class="h-1.5 w-full ph-flag-ribbon sticky top-0 z-50"></div>
+
+  <!-- TOP BROADCAST SCOREBOARD TICKER -->
+  <div class="bg-[#030917] border-b border-ph-blue/60 sticky top-1.5 z-50 shadow-lg">
+    <div class="max-w-7xl mx-auto flex items-center">
+      <div class="bg-ph-red px-4 py-2.5 flex items-center gap-2 shrink-0 border-r-2 border-ph-gold">
+        <span class="w-2.5 h-2.5 rounded-full bg-ph-gold animate-pulse"></span>
+        <span class="font-display text-lg tracking-wider uppercase font-bold text-white leading-none">SEASON 9 • OCT 24</span>
+      </div>
+      <div id="ticker-container" class="flex items-center overflow-x-auto scrollbar-none divide-x divide-ph-blue/40 py-1.5 px-2">
+        <!-- Populated via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN PHILIPPINE FLAG & BPBL SEASON 9 BROADCAST HEADER -->
+  <header class="bg-gradient-to-r from-ph-blue via-[#05153B] to-ph-red border-b-2 border-ph-gold sticky top-[47px] z-40 shadow-2xl">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-22 py-2.5 flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <!-- BPBL OFFICIAL LOGO CONTAINER (Auto-loads logo.jpg or 1000015325.jpg, with built-in SVG Crest fallback) -->
+        <a href="#" class="relative w-16 h-16 sm:w-18 sm:h-18 rounded-full p-0.5 bg-gradient-to-tr from-ph-blue via-white to-ph-red shadow-xl shadow-black/60 shrink-0 group">
+          <img 
+            id="bpbl-header-logo"
+            src="logo.jpg" 
+            alt="Batang Pinoy Basketball League Season 9 Logo" 
+            class="w-full h-full rounded-full object-cover border-2 border-white"
+            onerror="if(this.src.endsWith('logo.jpg')){this.src='1000015325.jpg';}else{this.style.display='none';document.getElementById('bpbl-svg-fallback').classList.remove('hidden');}"
+          />
+          <!-- Exact Vector Replica of the BPBL Crest (Maple Leaf + PH Sun + Basketball + 3 Stars) if image isn't uploaded yet -->
+          <svg id="bpbl-svg-fallback" class="hidden w-full h-full rounded-full" viewBox="0 0 120 120">
+            <circle cx="60" cy="60" r="58" fill="#0B5394" stroke="#FFFFFF" stroke-width="3"/>
+            <circle cx="60" cy="60" r="38" fill="#FFFFFF" stroke="#040D21" stroke-width="2"/>
+            <!-- Left Red Canadian Maple Leaf Half -->
+            <path d="M60 25 L52 38 L42 35 L46 48 L34 50 L42 60 L38 65 L60 65 Z" fill="#CE1126"/>
+            <!-- Right Gold Philippine Sun Rays Half -->
+            <path d="M60 25 L66 42 L74 32 L70 46 L84 42 L73 53 L86 54 L73 60 L84 65 L60 65 Z" fill="#FCD116" stroke="#991B1B" stroke-width="0.8"/>
+            <!-- Center Basketball -->
+            <circle cx="60" cy="54" r="15" fill="#E66C1F" stroke="#1E293B" stroke-width="1.8"/>
+            <path d="M45 54 Q60 48 75 54 M60 39 L60 69 M49 43 Q60 54 49 65 M71 43 Q60 54 71 65" fill="none" stroke="#1E293B" stroke-width="1.5"/>
+            <!-- Rim & Net -->
+            <rect x="40" y="69" width="40" height="3" rx="1.5" fill="#D97706" stroke="#1E293B" stroke-width="1"/>
+            <path d="M43 72 L48 92 L72 92 L77 72" fill="none" stroke="#E2E8F0" stroke-width="1.8" stroke-dasharray="3,2"/>
+            <path d="M46 80 L74 80 M48 87 L72 87 M52 72 L55 92 M60 72 L60 92 M68 72 L65 92" fill="none" stroke="#CBD5E1" stroke-width="1.2"/>
+            <!-- 3 Gold Stars on Blue Ring -->
+            <polygon points="60,4 63,11 70,11 64,15 66,22 60,18 54,22 56,15 50,11 57,11" fill="#FCD116" stroke="#FFFFFF" stroke-width="1"/>
+            <polygon points="14,52 17,58 23,58 18,62 20,68 14,64 8,68 10,62 5,58 11,58" fill="#FCD116" stroke="#FFFFFF" stroke-width="1"/>
+            <polygon points="106,52 109,58 115,58 110,62 112,68 106,64 100,68 102,62 97,58 103,58" fill="#FCD116" stroke="#FFFFFF" stroke-width="1"/>
+          </svg>
+        </a>
+
+        <div>
+          <div class="flex flex-wrap items-center gap-2.5">
+            <h1 class="font-display text-2xl sm:text-4xl font-bold tracking-wide text-white leading-none drop-shadow">
+              BATANG PINOY BASKETBALL LEAGUE
+            </h1>
+            <span class="inline-flex items-center gap-1 bg-gradient-to-r from-ph-gold via-amber-400 to-orange-500 text-ph-navy font-display text-sm sm:text-base px-3 py-0.5 rounded-full uppercase font-extrabold tracking-wider shadow-lg border border-white">
+              ★ SEASON 9 ★
+            </span>
+          </div>
+          <p class="text-xs text-blue-100 font-medium mt-0.5">
+            Tip-Off Sept 12 • Heading Into Week 6 • Official iTala Standings, Leaders & Storylines
+          </p>
+        </div>
+      </div>
+
+      <nav class="hidden lg:flex items-center gap-6 text-sm font-bold text-white">
+        <a href="#storylines" class="hover:text-ph-gold transition">Storylines</a>
+        <a href="#leaders" class="hover:text-ph-gold transition">League Leaders</a>
+        <a href="#standings" class="hover:text-ph-gold transition">Standings</a>
+        <a href="#results" class="hover:text-ph-gold transition">50-Game Log</a>
+        <a href="https://www.facebook.com/share/1EcopCUiT5/" target="_blank" rel="noopener" class="bg-ph-gold hover:bg-yellow-300 text-ph-navy px-4 py-2 rounded-lg text-xs font-extrabold uppercase tracking-wider transition shadow-lg">
+          Official Facebook ↗
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12 flex-1">
+
+    <!-- SEASON 9 SPOTLIGHT BANNER + HERO STORYLINES -->
+    <section id="storylines" class="space-y-4">
+      <div class="flex items-center justify-between border-b-2 border-ph-gold/40 pb-2">
+        <div class="flex items-center gap-2.5">
+          <span class="text-ph-gold text-xl leading-none">☀</span>
+          <h2 class="font-display text-3xl uppercase tracking-wide text-white">
+            BPBL <span class="season9-text">Season 9</span> • Heading Into Week 6 Storylines
+          </h2>
+        </div>
+        <div class="flex items-center gap-1.5 text-xs font-mono text-ph-gold">
+          <span>★ ★ ★</span>
+          <span class="text-blue-200">50 GAMES PLAYED SINCE SEPT 12</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- Main Feature Story (With Season 9 Crest Showcase) -->
+        <div class="lg:col-span-7 bg-gradient-to-br from-ph-blue via-[#061844] to-ph-red rounded-2xl border-2 border-ph-gold/80 p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden shadow-2xl">
+          <!-- Subtle Season 9 Logo Watermark in Corner -->
+          <img 
+            src="logo.jpg" 
+            alt="" 
+            class="absolute -right-10 -bottom-10 w-64 h-64 rounded-full opacity-15 pointer-events-none object-cover"
+            onerror="if(this.src.endsWith('logo.jpg')){this.src='1000015325.jpg';}else{this.style.display='none';}"
+          />
+
+          <div class="space-y-4 relative z-10">
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="bg-ph-red border border-white/30 text-white text-[11px] font-extrabold uppercase tracking-widest px-3 py-1 rounded shadow">
+                Season 9 • Open Division Headline
+              </span>
+              <span class="bg-ph-gold text-ph-navy text-xs font-mono font-extrabold px-2.5 py-0.5 rounded">
+                ★ THREE UNBEATEN GIANTS AT 5–0
+              </span>
+            </div>
+            <h3 class="font-display text-4xl sm:text-5xl font-bold uppercase leading-[0.95] text-white drop-shadow">
+              Unbeaten Collision Course: Bambhorats Knights, JMC Alliance & Haides X Journey Hit 5–0
+            </h3>
+            <p class="text-blue-50 text-sm sm:text-base leading-relaxed">
+              Since Season 9 tipped off on September 12, three undefeated Open Division powerhouses have refused to blink. <strong class="text-ph-gold">Bambhorats Knights (5–0, +164)</strong> own the league's most explosive offense at 86.2 PPG behind balanced playmakers <strong>Gerard Pamintuan</strong> (61 PTS, 21 REB, 13 AST) and <strong>Maestre</strong> (60 PTS, 15 AST). Right behind them, <strong class="text-ph-gold">JMC Alliance (5–0, +141)</strong> boasts a lockdown 40.6 PAPG defense, while <strong class="text-ph-gold">Haides X Journey (5–0, +89)</strong> is powered by MVP candidate <strong>Brent Padilla</strong> (76 PTS, co-league-best 34 REB) and league assist/block king <strong>Gel Santiago</strong> (59 PTS, 31 REB, 18 AST, 5 BLK).
+            </p>
+          </div>
+
+          <!-- 3-Star Unbeaten Team Boxes -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-6 mt-6 border-t border-white/20 relative z-10">
+            <div class="bg-ph-navy/85 p-3.5 rounded-xl border-l-4 border-ph-gold">
+              <div class="text-[11px] font-mono text-ph-gold uppercase font-bold">★ #1 Bambhorats Knights</div>
+              <div class="font-display text-3xl text-white font-bold">5-0 • +164</div>
+              <div class="text-[11px] text-blue-200">431 PF (86.2 PPG)</div>
+            </div>
+            <div class="bg-ph-navy/85 p-3.5 rounded-xl border-l-4 border-white">
+              <div class="text-[11px] font-mono text-white uppercase font-bold">★ #2 JMC Alliance</div>
+              <div class="font-display text-3xl text-white font-bold">5-0 • +141</div>
+              <div class="text-[11px] text-blue-200">203 PA (40.6 PAPG)</div>
+            </div>
+            <div class="bg-ph-navy/85 p-3.5 rounded-xl border-l-4 border-ph-red">
+              <div class="text-[11px] font-mono text-rose-300 uppercase font-bold">★ #3 Haides X Journey</div>
+              <div class="font-display text-3xl text-white font-bold">5-0 • +89</div>
+              <div class="text-[11px] text-blue-200">Padilla (76p) & Santiago (18a)</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Secondary Storyline Stack (Blue, Red, Gold Accented Cards) -->
+        <div class="lg:col-span-5 flex flex-col justify-between gap-4">
+          <div class="ph-card rounded-xl border-l-4 border-l-ph-gold border border-ph-blue/50 p-5 hover:border-ph-gold transition shadow-lg">
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="text-[11px] font-mono uppercase font-extrabold text-ph-gold">☀ Season 9 Scoring King</span>
+              <span class="text-xs font-mono text-blue-200">96 PTS in 4 Tracked Games</span>
+            </div>
+            <h4 class="font-display text-2xl uppercase font-bold text-white leading-tight">
+              Silent Threat's Jerome Verchez Leads All BPBL Scorers With 96 Points
+            </h4>
+            <p class="text-xs sm:text-sm text-blue-100 mt-1.5 leading-relaxed">
+              <strong>Jerome Verchez</strong> has been an unstoppable bucket-getter for <strong>Silent Threat (3–2)</strong>, pacing the entire league with <strong>96 recorded points (24.0 PPG)</strong> on 27 two-pointers, 9 triples, and 15 free throws—while also tying teammate <strong>Edson Lozada</strong> for #2 in steals (11 STL).
+            </p>
+          </div>
+
+          <div class="ph-card rounded-xl border-l-4 border-l-ph-red border border-ph-blue/50 p-5 hover:border-ph-gold transition shadow-lg">
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="text-[11px] font-mono uppercase font-extrabold text-rose-300">★ Baliklaro 35+ Logjam</span>
+              <span class="text-xs font-mono text-blue-200">4-Way Tie at 3–1</span>
+            </div>
+            <h4 class="font-display text-2xl uppercase font-bold text-white leading-tight">
+              Bernardino (20 3PM) & Sadornas (34 REB) Lift Salty Crew Into 4-Way Tie at 3–1
+            </h4>
+            <p class="text-xs sm:text-sm text-blue-100 mt-1.5 leading-relaxed">
+              Splash king <strong>Edward Bernardino</strong> (73 PTS, league-high <strong>20 3PM</strong>) and paint beast <strong>Paul Sadornas</strong> (70 PTS, co-league-high <strong>34 REB</strong>) powered Salty Crew 35+ past Bisdak 35+ (61–52), forging a 4-way tie at 3–1 alongside <strong>Bryan Onal's Pipers 35+</strong> (71 PTS) and <strong>FRP 35+</strong>.
+            </p>
+          </div>
+
+          <div class="ph-card rounded-xl border-l-4 border-l-ph-blue border border-ph-blue/50 p-5 hover:border-ph-gold transition shadow-lg">
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="text-[11px] font-mono uppercase font-extrabold text-sky-300">★ Defensive Lockdown</span>
+              <span class="text-xs font-mono text-blue-200">Wild Tribe at 4–1</span>
+            </div>
+            <h4 class="font-display text-2xl uppercase font-bold text-white leading-tight">
+              Ryan Cabico (16 STL) & Alvin Domenden (31 REB) Anchor 4–1 Wild Tribe
+            </h4>
+            <p class="text-xs sm:text-sm text-blue-100 mt-1.5 leading-relaxed">
+              League steals leader <strong>Ryan Cabico</strong> (16 STL, 12 AST, 3 BLK), two-way force <strong>Alvin Domenden</strong> (65 PTS, 31 REB, 10 STL), and <strong>Lordrikk Gutierrez</strong> (69 PTS, 9 STL) have Wild Tribe sitting at 4–1 (+55).
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE PLAYER LEADERBOARDS SECTION -->
+    <section id="leaders" class="space-y-5">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b-2 border-ph-gold/40 pb-3">
+        <div>
+          <div class="flex items-center gap-2.5">
+            <span class="text-ph-gold text-xl leading-none">★</span>
+            <h2 class="font-display text-3xl uppercase tracking-wide text-white">Season 9 Player Leaderboards</h2>
+          </div>
+          <p class="text-xs text-blue-200 mt-0.5">Filter by Category & Division • 86 of 100 Team Sides Tracked via iTala Mobile App</p>
+        </div>
+
+        <!-- Division Switcher for Leaderboards -->
+        <div class="inline-flex bg-[#030917] p-1 rounded-xl border border-ph-blue/60 self-start">
+          <button onclick="setLeaderDivision('ALL')" id="ldr-div-all" class="px-4 py-1.5 rounded-lg text-xs font-extrabold uppercase tracking-wider transition bg-ph-gold text-ph-navy shadow">
+            ☀ All BPBL
+          </button>
+          <button onclick="setLeaderDivision('OPEN')" id="ldr-div-open" class="px-4 py-1.5 rounded-lg text-xs font-extrabold uppercase tracking-wider transition text-blue-200 hover:text-white">
+            Open Division
+          </button>
+          <button onclick="setLeaderDivision('35+')" id="ldr-div-35" class="px-4 py-1.5 rounded-lg text-xs font-extrabold uppercase tracking-wider transition text-blue-200 hover:text-white">
+            Baliklaro 35+
+          </button>
+        </div>
+      </div>
+
+      <!-- Category Tabs -->
+      <div class="flex items-center gap-2 overflow-x-auto scrollbar-none pb-1">
+        <button onclick="setLeaderCategory('pts')" id="cat-pts" class="px-4 py-2 rounded-xl text-xs font-extrabold uppercase tracking-wider transition bg-ph-blue text-white border-2 border-ph-gold shrink-0 shadow-lg">
+          🔥 Scoring (PTS)
+        </button>
+        <button onclick="setLeaderCategory('reb')" id="cat-reb" class="px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition bg-[#071536] text-blue-100 hover:text-white border border-ph-blue/50 shrink-0">
+          💪 Rebounds (REB)
+        </button>
+        <button onclick="setLeaderCategory('ast')" id="cat-ast" class="px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition bg-[#071536] text-blue-100 hover:text-white border border-ph-blue/50 shrink-0">
+          🎯 Assists (AST)
+        </button>
+        <button onclick="setLeaderCategory('stl')" id="cat-stl" class="px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition bg-[#071536] text-blue-100 hover:text-white border border-ph-blue/50 shrink-0">
+          ⚡ Steals (STL)
+        </button>
+        <button onclick="setLeaderCategory('blk')" id="cat-blk" class="px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition bg-[#071536] text-blue-100 hover:text-white border border-ph-blue/50 shrink-0">
+          🛡️ Blocks (BLK)
+        </button>
+        <button onclick="setLeaderCategory('tpm')" id="cat-tpm" class="px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition bg-[#071536] text-blue-100 hover:text-white border border-ph-blue/50 shrink-0">
+          🏹 3-Pointers Made (3PM)
+        </button>
+      </div>
+
+      <!-- Spotlight Card + Leaderboard Table Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        <!-- #1 Leader Spotlight Card -->
+        <div id="leader-spotlight" class="lg:col-span-4 bg-gradient-to-b from-ph-blue via-[#061844] to-ph-red border-2 border-ph-gold rounded-2xl p-6 shadow-2xl relative overflow-hidden">
+          <!-- Populated via JS -->
+        </div>
+
+        <!-- Top 15 Leaderboard Table -->
+        <div class="lg:col-span-8 ph-card border border-ph-blue/60 rounded-2xl overflow-hidden shadow-2xl">
+          <div class="p-4 bg-gradient-to-r from-ph-blue/80 via-[#071536] to-ph-red/80 border-b border-ph-gold/40 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <h3 id="leader-table-title" class="font-display text-2xl uppercase text-white leading-none">Recorded Points Leaderboard</h3>
+              <p class="text-[11px] text-blue-100 mt-0.5">Showing Top 15 Performers • Search any player or team below</p>
+            </div>
+            <input id="leader-search" oninput="renderLeaderboards()" type="text" placeholder="Search player or team..." class="bg-[#030917] border border-ph-gold/50 text-xs text-white rounded-lg px-3 py-1.5 w-full sm:w-56 focus:outline-none focus:border-ph-gold" />
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr id="leader-thead" class="bg-[#030917] border-b border-ph-blue/50 text-[11px] font-mono uppercase text-ph-gold">
+                  <!-- Populated via JS -->
+                </tr>
+              </thead>
+              <tbody id="leader-tbody" class="divide-y divide-ph-blue/30 text-sm">
+                <!-- Populated via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OFFICIAL STANDINGS SECTION -->
+    <section id="standings" class="space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b-2 border-ph-gold/40 pb-3">
+        <div>
+          <div class="flex items-center gap-2.5">
+            <span class="w-2 h-6 bg-ph-blue border border-ph-gold rounded-sm"></span>
+            <h2 class="font-display text-3xl uppercase tracking-wide text-white">Season 9 Official Division Standings</h2>
+          </div>
+          <p class="text-xs text-blue-200 mt-0.5">Ranked by Wins (W), Point Differential (+/-), and Points For (PF) through Oct 24, 2026</p>
+        </div>
+
+        <div class="inline-flex bg-[#030917] p-1 rounded-xl border border-ph-blue/60 self-start">
+          <button onclick="switchStandingsDivision('open')" id="btn-standings-open" class="px-4 py-1.5 rounded-lg text-xs font-extrabold uppercase tracking-wider transition bg-ph-blue text-white border border-ph-gold shadow">
+            BPBL Open Division (14)
+          </button>
+          <button onclick="switchStandingsDivision('35plus')" id="btn-standings-35plus" class="px-4 py-1.5 rounded-lg text-xs font-extrabold uppercase tracking-wider transition text-blue-200 hover:text-white">
+            Baliklaro 35+ (7)
+          </button>
+        </div>
+      </div>
+
+      <div class="ph-card rounded-2xl border border-ph-blue/60 overflow-hidden shadow-2xl">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-gradient-to-r from-ph-blue via-[#061A48] to-ph-red border-b border-ph-gold/50 text-[11px] font-mono uppercase text-ph-gold">
+                <th class="py-3.5 px-4 w-14">Rank</th>
+                <th class="py-3.5 px-4">Team</th>
+                <th class="py-3.5 px-3 text-center">GP</th>
+                <th class="py-3.5 px-3 text-center">W</th>
+                <th class="py-3.5 px-3 text-center">L</th>
+                <th class="py-3.5 px-3 text-center hidden sm:table-cell">PCT</th>
+                <th class="py-3.5 px-3 text-right">PF</th>
+                <th class="py-3.5 px-3 text-right">PA</th>
+                <th class="py-3.5 px-3 text-right">PPG</th>
+                <th class="py-3.5 px-4 text-right">+/-</th>
+                <th class="py-3.5 px-4 text-center hidden md:table-cell">Status / Tier</th>
+              </tr>
+            </thead>
+            <tbody id="standings-tbody" class="divide-y divide-ph-blue/30 text-sm">
+              <!-- Populated via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMPLETE 50-GAME RESULTS LOG -->
+    <section id="results" class="space-y-4">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b-2 border-ph-gold/40 pb-3">
+        <div>
+          <div class="flex items-center gap-2.5">
+            <span class="w-2 h-6 bg-ph-red border border-ph-gold rounded-sm"></span>
+            <h2 class="font-display text-3xl uppercase tracking-wide text-white">Season 9 Official 50-Game Results Log</h2>
+          </div>
+          <p class="text-xs text-blue-200 mt-0.5">Filter by Gameday Date, Division, or Team Name (Sept 12 – Oct 24, 2026)</p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2">
+          <select id="filter-date" onchange="renderGames()" class="bg-[#030917] border border-ph-blue text-xs font-bold text-white rounded-lg px-3 py-2 focus:outline-none focus:border-ph-gold">
+            <option value="ALL">All Gamedays (50 Games)</option>
+            <option value="24/10/2026" selected>Week 5 — Oct 24, 2026 (10 Games)</option>
+            <option value="17/10/2026">Week 4 — Oct 17, 2026 (10 Games)</option>
+            <option value="26/09/2026">Week 3 — Sept 26, 2026 (10 Games)</option>
+            <option value="19/09/2026">Week 2 — Sept 19, 2026 (10 Games)</option>
+            <option value="12/09/2026">Week 1 — Sept 12, 2026 (10 Games)</option>
+          </select>
+
+          <select id="filter-division" onchange="renderGames()" class="bg-[#030917] border border-ph-blue text-xs font-bold text-white rounded-lg px-3 py-2 focus:outline-none focus:border-ph-gold">
+            <option value="ALL">All Divisions</option>
+            <option value="BPBL OPEN DIVISION">BPBL Open Division (35)</option>
+            <option value="BPBL BALIKLARO 35+">BPBL Baliklaro 35+ (15)</option>
+          </select>
+
+          <input id="filter-team" oninput="renderGames()" type="text" placeholder="Search team..." class="bg-[#030917] border border-ph-blue text-xs text-white rounded-lg px-3 py-2 w-40 focus:outline-none focus:border-ph-gold" />
+        </div>
+      </div>
+
+      <div id="games-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- Populated via JS -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- PHILIPPINE FLAG FOOTER -->
+  <div class="h-1.5 w-full ph-flag-ribbon mt-12"></div>
+  <footer class="bg-[#030917] py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-blue-200">
+      <div class="flex items-center gap-3">
+        <span class="text-ph-gold text-base">☀ ★ ★ ★</span>
+        <div>
+          <span class="font-bold text-white">BATANG PINOY BASKETBALL LEAGUE (BPBL) — SEASON 9</span> • Official Standings, Stats & Results Hub
+        </div>
+      </div>
+      <div>
+        Source: iTala Connect Official Reports (50 Games Scored • 86/100 Team Sides Mobile Tracked • Oct 30, 2026)
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // =========================================================================
+    // OFFICIAL BPBL SEASON 9 DATA (ITALA CONNECT PDF REPORTS - OCT 30, 2026)
+    // =========================================================================
+    const BPBL_DATA = {
+      standings: {
+        open: [
+          { rank: 1, team: "BAMBHORATS KNIGHTS", gp: 5, w: 5, l: 0, pf: 431, pa: 267, diff: 164 },
+          { rank: 2, team: "JMC ALLIANCE", gp: 5, w: 5, l: 0, pf: 344, pa: 203, diff: 141 },
+          { rank: 3, team: "HAIDES X JOURNEY", gp: 5, w: 5, l: 0, pf: 383, pa: 294, diff: 89 },
+          { rank: 4, team: "WILD TRIBE", gp: 5, w: 4, l: 1, pf: 311, pa: 256, diff: 55 },
+          { rank: 5, team: "SILENT THREAT", gp: 5, w: 3, l: 2, pf: 367, pa: 334, diff: 33 },
+          { rank: 6, team: "EPIC GRILL SILOGS", gp: 5, w: 3, l: 2, pf: 332, pa: 335, diff: -3 },
+          { rank: 7, team: "PIPERS", gp: 5, w: 2, l: 3, pf: 308, pa: 330, diff: -22 },
+          { rank: 8, team: "FITMAN HUNTER", gp: 5, w: 2, l: 3, pf: 317, pa: 368, diff: -51 },
+          { rank: 9, team: "SLYTHERIN", gp: 5, w: 1, l: 4, pf: 280, pa: 311, diff: -31 },
+          { rank: 10, team: "SANDO REPUBLIKA", gp: 5, w: 1, l: 4, pf: 301, pa: 337, diff: -36 },
+          { rank: 11, team: "QUOLOS CONSTRUCTION", gp: 5, w: 1, l: 4, pf: 270, pa: 330, diff: -60 },
+          { rank: 12, team: "L2G", gp: 5, w: 1, l: 4, pf: 270, pa: 337, diff: -67 },
+          { rank: 13, team: "GENTLEMEN'S CLUB", gp: 5, w: 1, l: 4, pf: 293, pa: 375, diff: -82 },
+          { rank: 14, team: "DENTIO DENTAL", gp: 5, w: 1, l: 4, pf: 297, pa: 427, diff: -130 }
+        ],
+        baliklaro35: [
+          { rank: 1, team: "PIPERS 35+", gp: 4, w: 3, l: 1, pf: 279, pa: 221, diff: 58 },
+          { rank: 2, team: "BISDAK 35+", gp: 4, w: 3, l: 1, pf: 268, pa: 217, diff: 51 },
+          { rank: 3, team: "FRP 35+", gp: 4, w: 3, l: 1, pf: 249, pa: 210, diff: 39 },
+          { rank: 4, team: "SALTY CREW 35+", gp: 4, w: 3, l: 1, pf: 262, pa: 241, diff: 21 },
+          { rank: 5, team: "JMC ALLIANCE 35+", gp: 4, w: 2, l: 2, pf: 258, pa: 252, diff: 6 },
+          { rank: 6, team: "BAMBHORATS KNIGHTS 35+", gp: 5, w: 1, l: 4, pf: 273, pa: 340, diff: -67 },
+          { rank: 7, team: "MAMBA BALLERS 35+", gp: 5, w: 0, l: 5, pf: 294, pa: 402, diff: -108 }
+        ]
+      },
+
+      // Official Player Stats from iTala Connect 51-Page Report
+      players: [
+        { name: "Jerome Verchez", team: "SILENT THREAT", div: "OPEN", gp: 4, pts: 96, fg2: 27, tpm: 9, ftm: 15, reb: 11, ast: 4, stl: 11, blk: 1 },
+        { name: "Jake Gaspar", team: "QUOLOS CONSTRUCTION", div: "OPEN", gp: 4, pts: 78, fg2: 23, tpm: 7, ftm: 11, reb: 28, ast: 7, stl: 8, blk: 1 },
+        { name: "Brent Padilla", team: "HAIDES X JOURNEY", div: "OPEN", gp: 5, pts: 76, fg2: 27, tpm: 5, ftm: 7, reb: 34, ast: 3, stl: 2, blk: 3 },
+        { name: "Edward Bernardino", team: "SALTY CREW 35+", div: "35+", gp: 4, pts: 73, fg2: 3, tpm: 20, ftm: 7, reb: 19, ast: 1, stl: 4, blk: 0 },
+        { name: "Bryan Onal", team: "PIPERS 35+", div: "35+", gp: 4, pts: 71, fg2: 14, tpm: 11, ftm: 10, reb: 7, ast: 4, stl: 3, blk: 0 },
+        { name: "Paul Sadornas", team: "SALTY CREW 35+", div: "35+", gp: 4, pts: 70, fg2: 29, tpm: 0, ftm: 12, reb: 34, ast: 5, stl: 3, blk: 2 },
+        { name: "Adolfo Jeff", team: "SLYTHERIN", div: "OPEN", gp: 4, pts: 69, fg2: 13, tpm: 10, ftm: 13, reb: 17, ast: 5, stl: 3, blk: 0 },
+        { name: "Lordrikk Gutierrez", team: "WILD TRIBE", div: "OPEN", gp: 5, pts: 69, fg2: 18, tpm: 6, ftm: 15, reb: 12, ast: 7, stl: 9, blk: 2 },
+        { name: "Jacob Oreta", team: "EPIC GRILL SILOGS", div: "OPEN", gp: 3, pts: 67, fg2: 27, tpm: 2, ftm: 7, reb: 21, ast: 7, stl: 4, blk: 0 },
+        { name: "Lian Boac", team: "SANDO REPUBLIKA", div: "OPEN", gp: 5, pts: 65, fg2: 29, tpm: 2, ftm: 1, reb: 16, ast: 9, stl: 6, blk: 0 },
+        { name: "Paul Miguel", team: "DENTIO DENTAL", div: "OPEN", gp: 5, pts: 65, fg2: 27, tpm: 2, ftm: 5, reb: 26, ast: 1, stl: 4, blk: 0 },
+        { name: "Alvin Domenden", team: "WILD TRIBE", div: "OPEN", gp: 5, pts: 65, fg2: 21, tpm: 3, ftm: 14, reb: 31, ast: 6, stl: 10, blk: 2 },
+        { name: "Tristan Valdez", team: "QUOLOS CONSTRUCTION", div: "OPEN", gp: 4, pts: 64, fg2: 14, tpm: 10, ftm: 6, reb: 28, ast: 7, stl: 4, blk: 2 },
+        { name: "Gerard Pamintuan", team: "BAMBHORATS KNIGHTS", div: "OPEN", gp: 4, pts: 61, fg2: 19, tpm: 5, ftm: 8, reb: 21, ast: 13, stl: 4, blk: 2 },
+        { name: "Maestre", team: "BAMBHORATS KNIGHTS", div: "OPEN", gp: 4, pts: 60, fg2: 18, tpm: 7, ftm: 3, reb: 11, ast: 15, stl: 4, blk: 0 },
+        { name: "Dominic Robles", team: "GENTLEMEN'S CLUB", div: "OPEN", gp: 4, pts: 59, fg2: 17, tpm: 6, ftm: 7, reb: 12, ast: 4, stl: 9, blk: 0 },
+        { name: "Gel Santiago", team: "HAIDES X JOURNEY", div: "OPEN", gp: 5, pts: 59, fg2: 19, tpm: 5, ftm: 6, reb: 31, ast: 18, stl: 5, blk: 5 },
+        { name: "Oregas Rafael", team: "SLYTHERIN", div: "OPEN", gp: 3, pts: 55, fg2: 17, tpm: 6, ftm: 3, reb: 22, ast: 1, stl: 2, blk: 1 },
+        { name: "Nikko Gammueda", team: "EPIC GRILL SILOGS", div: "OPEN", gp: 4, pts: 54, fg2: 15, tpm: 7, ftm: 3, reb: 16, ast: 6, stl: 2, blk: 0 },
+        { name: "Mark Ababon", team: "BISDAK 35+", div: "35+", gp: 4, pts: 50, fg2: 15, tpm: 5, ftm: 5, reb: 11, ast: 14, stl: 10, blk: 1 },
+        { name: "Edson Lozada", team: "SILENT THREAT", div: "OPEN", gp: 4, pts: 50, fg2: 18, tpm: 3, ftm: 5, reb: 13, ast: 8, stl: 11, blk: 0 },
+        { name: "Bautista", team: "BAMBHORATS KNIGHTS", div: "OPEN", gp: 4, pts: 49, fg2: 19, tpm: 2, ftm: 5, reb: 24, ast: 10, stl: 8, blk: 0 },
+        { name: "Derrick Gonzales", team: "HAIDES X JOURNEY", div: "OPEN", gp: 4, pts: 49, fg2: 12, tpm: 8, ftm: 1, reb: 8, ast: 14, stl: 8, blk: 0 },
+        { name: "Keon Gonzales", team: "L2G", div: "OPEN", gp: 4, pts: 48, fg2: 13, tpm: 7, ftm: 1, reb: 18, ast: 2, stl: 2, blk: 0 },
+        { name: "Ed Asirit", team: "BAMBHORATS KNIGHTS", div: "OPEN", gp: 3, pts: 47, fg2: 13, tpm: 6, ftm: 3, reb: 22, ast: 11, stl: 2, blk: 0 },
+        { name: "Sheino Sabinorio", team: "DENTIO DENTAL", div: "OPEN", gp: 4, pts: 47, fg2: 20, tpm: 1, ftm: 4, reb: 10, ast: 8, stl: 3, blk: 0 },
+        { name: "Franz Sapiera", team: "PIPERS", div: "OPEN", gp: 4, pts: 44, fg2: 12, tpm: 4, ftm: 8, reb: 22, ast: 3, stl: 1, blk: 0 },
+        { name: "Marko Juan", team: "PIPERS", div: "OPEN", gp: 4, pts: 44, fg2: 6, tpm: 9, ftm: 5, reb: 11, ast: 0, stl: 4, blk: 0 },
+        { name: "Miko Donado", team: "QUOLOS CONSTRUCTION", div: "OPEN", gp: 4, pts: 43, fg2: 13, tpm: 2, ftm: 11, reb: 15, ast: 9, stl: 4, blk: 1 },
+        { name: "Jerric Palma", team: "HAIDES X JOURNEY", div: "OPEN", gp: 3, pts: 43, fg2: 14, tpm: 3, ftm: 6, reb: 15, ast: 10, stl: 8, blk: 1 },
+        { name: "Jose Malabanan", team: "HAIDES X JOURNEY", div: "OPEN", gp: 4, pts: 43, fg2: 11, tpm: 7, ftm: 0, reb: 20, ast: 12, stl: 5, blk: 1 },
+        { name: "Gio Duo", team: "EPIC GRILL SILOGS", div: "OPEN", gp: 4, pts: 42, fg2: 17, tpm: 2, ftm: 2, reb: 25, ast: 4, stl: 4, blk: 0 },
+        { name: "Melicor", team: "FITMAN HUNTER", div: "OPEN", gp: 1, pts: 42, fg2: 9, tpm: 8, ftm: 0, reb: 3, ast: 0, stl: 3, blk: 0 },
+        { name: "Reb Narra", team: "SALTY CREW 35+", div: "35+", gp: 4, pts: 41, fg2: 11, tpm: 3, ftm: 10, reb: 18, ast: 11, stl: 5, blk: 0 },
+        { name: "Fernan Olivas", team: "BAMBHORATS KNIGHTS 35+", div: "35+", gp: 4, pts: 40, fg2: 10, tpm: 5, ftm: 5, reb: 13, ast: 11, stl: 8, blk: 1 },
+        { name: "Llorikk Gutierrez", team: "WILD TRIBE", div: "OPEN", gp: 5, pts: 39, fg2: 14, tpm: 2, ftm: 5, reb: 19, ast: 5, stl: 8, blk: 3 },
+        { name: "Nel Santiago", team: "HAIDES X JOURNEY", div: "OPEN", gp: 4, pts: 39, fg2: 9, tpm: 7, ftm: 0, reb: 9, ast: 8, stl: 2, blk: 0 },
+        { name: "DJ Sugue", team: "EPIC GRILL SILOGS", div: "OPEN", gp: 4, pts: 38, fg2: 2, tpm: 11, ftm: 1, reb: 9, ast: 10, stl: 4, blk: 0 },
+        { name: "Ken Argentes", team: "JMC ALLIANCE", div: "OPEN", gp: 2, pts: 38, fg2: 16, tpm: 0, ftm: 6, reb: 19, ast: 2, stl: 3, blk: 3 },
+        { name: "Mel San Miguel", team: "MAMBA BALLERS 35+", div: "35+", gp: 3, pts: 37, fg2: 2, tpm: 11, ftm: 0, reb: 5, ast: 2, stl: 2, blk: 0 },
+        { name: "Paul Sadornas (Open)", team: "EPIC GRILL SILOGS", div: "OPEN", gp: 5, pts: 37, fg2: 17, tpm: 0, ftm: 3, reb: 26, ast: 3, stl: 4, blk: 2 },
+        { name: "Luigi Torre", team: "PIPERS", div: "OPEN", gp: 5, pts: 36, fg2: 14, tpm: 1, ftm: 5, reb: 28, ast: 2, stl: 4, blk: 2 },
+        { name: "Al Imperial", team: "GENTLEMEN'S CLUB", div: "OPEN", gp: 3, pts: 35, fg2: 4, tpm: 8, ftm: 3, reb: 9, ast: 5, stl: 0, blk: 0 },
+        { name: "George Dela Cruz", team: "PIPERS 35+", div: "35+", gp: 3, pts: 31, fg2: 11, tpm: 2, ftm: 3, reb: 31, ast: 6, stl: 0, blk: 3 },
+        { name: "Naqkhem Perales", team: "SILENT THREAT", div: "OPEN", gp: 3, pts: 28, fg2: 9, tpm: 3, ftm: 1, reb: 34, ast: 6, stl: 1, blk: 2 },
+        { name: "Jun Corpuz", team: "JMC ALLIANCE 35+", div: "35+", gp: 2, pts: 27, fg2: 0, tpm: 9, ftm: 0, reb: 1, ast: 1, stl: 0, blk: 0 },
+        { name: "Jaypee Coronel", team: "EPIC GRILL SILOGS", div: "OPEN", gp: 5, pts: 27, fg2: 10, tpm: 2, ftm: 1, reb: 29, ast: 5, stl: 3, blk: 1 },
+        { name: "Abe Lat", team: "PIPERS", div: "OPEN", gp: 4, pts: 27, fg2: 9, tpm: 3, ftm: 0, reb: 9, ast: 11, stl: 9, blk: 1 },
+        { name: "Ryan Cabico", team: "WILD TRIBE", div: "OPEN", gp: 4, pts: 26, fg2: 10, tpm: 2, ftm: 0, reb: 10, ast: 12, stl: 16, blk: 3 },
+        { name: "Mark Gonzalez", team: "FRP 35+", div: "35+", gp: 3, pts: 25, fg2: 10, tpm: 1, ftm: 2, reb: 6, ast: 4, stl: 2, blk: 4 },
+        { name: "Christian Bobis", team: "GENTLEMEN'S CLUB", div: "OPEN", gp: 4, pts: 24, fg2: 11, tpm: 0, ftm: 2, reb: 28, ast: 3, stl: 4, blk: 0 },
+        { name: "Ryan Rusiana", team: "BISDAK 35+", div: "35+", gp: 3, pts: 23, fg2: 9, tpm: 0, ftm: 5, reb: 15, ast: 2, stl: 1, blk: 3 },
+        { name: "Reggie Alano", team: "PIPERS 35+", div: "35+", gp: 4, pts: 18, fg2: 8, tpm: 0, ftm: 2, reb: 22, ast: 4, stl: 3, blk: 3 },
+        { name: "Jaye Raganit", team: "SANDO REPUBLIKA", div: "OPEN", gp: 3, pts: 17, fg2: 8, tpm: 0, ftm: 1, reb: 8, ast: 8, stl: 9, blk: 0 },
+        { name: "Beloy Delmendo", team: "SILENT THREAT", div: "OPEN", gp: 2, pts: 11, fg2: 3, tpm: 1, ftm: 2, reb: 8, ast: 0, stl: 1, blk: 3 },
+        { name: "Benson Laconsay", team: "EPIC GRILL SILOGS", div: "OPEN", gp: 1, pts: 9, fg2: 4, tpm: 0, ftm: 1, reb: 6, ast: 2, stl: 0, blk: 4 },
+        { name: "Roy Apigo", team: "SANDO REPUBLIKA", div: "OPEN", gp: 4, pts: 30, fg2: 10, tpm: 3, ftm: 1, reb: 16, ast: 2, stl: 9, blk: 0 },
+        { name: "Cabahug", team: "FITMAN HUNTER", div: "OPEN", gp: 4, pts: 30, fg2: 14, tpm: 0, ftm: 2, reb: 13, ast: 4, stl: 2, blk: 3 }
+      ],
+
+      games: [
+        // WEEK 1 - 12/09/2026
+        { date: "12/09/2026", division: "BPBL OPEN DIVISION", home: "GENTLEMEN'S CLUB", homeScore: 57, awayScore: 75, away: "HAIDES X JOURNEY" },
+        { date: "12/09/2026", division: "BPBL BALIKLARO 35+", home: "SALTY CREW 35+", homeScore: 70, awayScore: 52, away: "BAMBHORATS KNIGHTS 35+" },
+        { date: "12/09/2026", division: "BPBL OPEN DIVISION", home: "WILD TRIBE", homeScore: 62, awayScore: 52, away: "PIPERS" },
+        { date: "12/09/2026", division: "BPBL OPEN DIVISION", home: "SANDO REPUBLIKA", homeScore: 38, awayScore: 77, away: "BAMBHORATS KNIGHTS" },
+        { date: "12/09/2026", division: "BPBL BALIKLARO 35+", home: "MAMBA BALLERS 35+", homeScore: 51, awayScore: 81, away: "BISDAK 35+" },
+        { date: "12/09/2026", division: "BPBL OPEN DIVISION", home: "L2G", homeScore: 39, awayScore: 71, away: "EPIC GRILL SILOGS" },
+        { date: "12/09/2026", division: "BPBL OPEN DIVISION", home: "FITMAN HUNTER", homeScore: 42, awayScore: 96, away: "JMC ALLIANCE" },
+        { date: "12/09/2026", division: "BPBL OPEN DIVISION", home: "SILENT THREAT", homeScore: 68, awayScore: 58, away: "QUOLOS CONSTRUCTION" },
+        { date: "12/09/2026", division: "BPBL BALIKLARO 35+", home: "PIPERS 35+", homeScore: 61, awayScore: 53, away: "JMC ALLIANCE 35+" },
+        { date: "12/09/2026", division: "BPBL OPEN DIVISION", home: "DENTIO DENTAL", homeScore: 79, awayScore: 87, away: "SLYTHERIN" },
+
+        // WEEK 2 - 19/09/2026
+        { date: "19/09/2026", division: "BPBL OPEN DIVISION", home: "WILD TRIBE", homeScore: 61, awayScore: 46, away: "SLYTHERIN" },
+        { date: "19/09/2026", division: "BPBL BALIKLARO 35+", home: "SALTY CREW 35+", homeScore: 61, awayScore: 58, away: "PIPERS 35+" },
+        { date: "19/09/2026", division: "BPBL OPEN DIVISION", home: "L2G", homeScore: 62, awayScore: 89, away: "HAIDES X JOURNEY" },
+        { date: "19/09/2026", division: "BPBL OPEN DIVISION", home: "SANDO REPUBLIKA", homeScore: 84, awayScore: 66, away: "FITMAN HUNTER" },
+        { date: "19/09/2026", division: "BPBL OPEN DIVISION", home: "DENTIO DENTAL", homeScore: 34, awayScore: 111, away: "BAMBHORATS KNIGHTS" },
+        { date: "19/09/2026", division: "BPBL BALIKLARO 35+", home: "MAMBA BALLERS 35+", homeScore: 71, awayScore: 75, away: "BAMBHORATS KNIGHTS 35+" },
+        { date: "19/09/2026", division: "BPBL OPEN DIVISION", home: "SILENT THREAT", homeScore: 66, awayScore: 69, away: "PIPERS" },
+        { date: "19/09/2026", division: "BPBL OPEN DIVISION", home: "GENTLEMEN'S CLUB", homeScore: 56, awayScore: 105, away: "JMC ALLIANCE" },
+        { date: "19/09/2026", division: "BPBL BALIKLARO 35+", home: "FRP 35+", homeScore: 64, awayScore: 45, away: "JMC ALLIANCE 35+" },
+        { date: "19/09/2026", division: "BPBL OPEN DIVISION", home: "QUOLOS CONSTRUCTION", homeScore: 74, awayScore: 90, away: "EPIC GRILL SILOGS" },
+
+        // WEEK 3 - 26/09/2026
+        { date: "26/09/2026", division: "BPBL OPEN DIVISION", home: "QUOLOS CONSTRUCTION", homeScore: 65, awayScore: 72, away: "HAIDES X JOURNEY" },
+        { date: "26/09/2026", division: "BPBL BALIKLARO 35+", home: "MAMBA BALLERS 35+", homeScore: 60, awayScore: 74, away: "FRP 35+" },
+        { date: "26/09/2026", division: "BPBL OPEN DIVISION", home: "GENTLEMEN'S CLUB", homeScore: 54, awayScore: 71, away: "FITMAN HUNTER" },
+        { date: "26/09/2026", division: "BPBL OPEN DIVISION", home: "WILD TRIBE", homeScore: 40, awayScore: 42, away: "BAMBHORATS KNIGHTS" },
+        { date: "26/09/2026", division: "BPBL BALIKLARO 35+", home: "BAMBHORATS KNIGHTS 35+", homeScore: 53, awayScore: 71, away: "BISDAK 35+" },
+        { date: "26/09/2026", division: "BPBL OPEN DIVISION", home: "L2G", homeScore: 47, awayScore: 50, away: "JMC ALLIANCE" },
+        { date: "26/09/2026", division: "BPBL OPEN DIVISION", home: "SANDO REPUBLIKA", homeScore: 59, awayScore: 63, away: "DENTIO DENTAL" },
+        { date: "26/09/2026", division: "BPBL OPEN DIVISION", home: "SILENT THREAT", homeScore: 63, awayScore: 54, away: "SLYTHERIN" },
+        { date: "26/09/2026", division: "BPBL OPEN DIVISION", home: "EPIC GRILL SILOGS", homeScore: 46, awayScore: 65, away: "PIPERS" },
+        { date: "26/09/2026", division: "BPBL BALIKLARO 35+", home: "SALTY CREW 35+", homeScore: 70, awayScore: 79, away: "JMC ALLIANCE 35+" },
+
+        // WEEK 4 - 17/10/2026
+        { date: "17/10/2026", division: "BPBL OPEN DIVISION", home: "WILD TRIBE", homeScore: 84, awayScore: 59, away: "DENTIO DENTAL" },
+        { date: "17/10/2026", division: "BPBL BALIKLARO 35+", home: "BAMBHORATS KNIGHTS 35+", homeScore: 52, awayScore: 69, away: "PIPERS 35+" },
+        { date: "17/10/2026", division: "BPBL OPEN DIVISION", home: "PIPERS", homeScore: 64, awayScore: 93, away: "HAIDES X JOURNEY" },
+        { date: "17/10/2026", division: "BPBL OPEN DIVISION", home: "SANDO REPUBLIKA", homeScore: 63, awayScore: 67, away: "GENTLEMEN'S CLUB" },
+        { date: "17/10/2026", division: "BPBL OPEN DIVISION", home: "EPIC GRILL SILOGS", homeScore: 54, awayScore: 47, away: "SLYTHERIN" },
+        { date: "17/10/2026", division: "BPBL BALIKLARO 35+", home: "JMC ALLIANCE 35+", homeScore: 81, awayScore: 57, away: "MAMBA BALLERS 35+" },
+        { date: "17/10/2026", division: "BPBL OPEN DIVISION", home: "QUOLOS CONSTRUCTION", homeScore: 0, awayScore: 30, away: "JMC ALLIANCE" },
+        { date: "17/10/2026", division: "BPBL OPEN DIVISION", home: "L2G", homeScore: 61, awayScore: 68, away: "FITMAN HUNTER" },
+        { date: "17/10/2026", division: "BPBL OPEN DIVISION", home: "SILENT THREAT", homeScore: 84, awayScore: 91, away: "BAMBHORATS KNIGHTS" },
+        { date: "17/10/2026", division: "BPBL BALIKLARO 35+", home: "BISDAK 35+", homeScore: 64, awayScore: 52, away: "FRP 35+" },
+
+        // WEEK 5 - 24/10/2026
+        { date: "24/10/2026", division: "BPBL OPEN DIVISION", home: "QUOLOS CONSTRUCTION", homeScore: 73, awayScore: 70, away: "FITMAN HUNTER" },
+        { date: "24/10/2026", division: "BPBL OPEN DIVISION", home: "HAIDES X JOURNEY", homeScore: 54, awayScore: 46, away: "SLYTHERIN" },
+        { date: "24/10/2026", division: "BPBL BALIKLARO 35+", home: "PIPERS 35+", homeScore: 91, awayScore: 55, away: "MAMBA BALLERS 35+" },
+        { date: "24/10/2026", division: "BPBL OPEN DIVISION", home: "SANDO REPUBLIKA", homeScore: 57, awayScore: 64, away: "WILD TRIBE" },
+        { date: "24/10/2026", division: "BPBL OPEN DIVISION", home: "L2G", homeScore: 61, awayScore: 59, away: "GENTLEMEN'S CLUB" },
+        { date: "24/10/2026", division: "BPBL BALIKLARO 35+", home: "SALTY CREW 35+", homeScore: 61, awayScore: 52, away: "BISDAK 35+" },
+        { date: "24/10/2026", division: "BPBL BALIKLARO 35+", home: "BAMBHORATS KNIGHTS 35+", homeScore: 41, awayScore: 59, away: "FRP 35+" },
+        { date: "24/10/2026", division: "BPBL OPEN DIVISION", home: "SILENT THREAT", homeScore: 86, awayScore: 62, away: "DENTIO DENTAL" },
+        { date: "24/10/2026", division: "BPBL OPEN DIVISION", home: "PIPERS", homeScore: 58, awayScore: 63, away: "JMC ALLIANCE" },
+        { date: "24/10/2026", division: "BPBL OPEN DIVISION", home: "EPIC GRILL SILOGS", homeScore: 71, awayScore: 110, away: "BAMBHORATS KNIGHTS" }
+      ]
+    };
+
+    // =========================================================================
+    // LEADERBOARD CONTROLLER
+    // =========================================================================
+    let activeLeaderCategory = 'pts';
+    let activeLeaderDivision = 'ALL';
+
+    const CATEGORY_META = {
+      pts: { title: "Season 9 Recorded Points Leaderboard", label: "PTS", perGameLabel: "PPG", color: "text-ph-gold" },
+      reb: { title: "Season 9 Rebounds Leaderboard", label: "REB", perGameLabel: "RPG", color: "text-ph-gold" },
+      ast: { title: "Season 9 Assists Leaderboard", label: "AST", perGameLabel: "APG", color: "text-ph-gold" },
+      stl: { title: "Season 9 Steals Leaderboard", label: "STL", perGameLabel: "SPG", color: "text-ph-gold" },
+      blk: { title: "Season 9 Blocks Leaderboard", label: "BLK", perGameLabel: "BPG", color: "text-ph-gold" },
+      tpm: { title: "Season 9 3-Pointers Made Leaderboard", label: "3PM", perGameLabel: "3PG", color: "text-ph-gold" }
+    };
+
+    function setLeaderDivision(div) {
+      activeLeaderDivision = div;
+      const btns = {
+        'ALL': document.getElementById('ldr-div-all'),
+        'OPEN': document.getElementById('ldr-div-open'),
+        '35+': document.getElementById('ldr-div-35')
+      };
+      Object.keys(btns).forEach(k => {
+        if (k === div) {
+          btns[k].className = "px-4 py-1.5 rounded-lg text-xs font-extrabold uppercase tracking-wider transition bg-ph-gold text-ph-navy shadow";
+        } else {
+          btns[k].className = "px-4 py-1.5 rounded-lg text-xs font-extrabold uppercase tracking-wider transition text-blue-200 hover:text-white";
+        }
+      });
+      renderLeaderboards();
+    }
+
+    function setLeaderCategory(cat) {
+      activeLeaderCategory = cat;
+      const cats = ['pts', 'reb', 'ast', 'stl', 'blk', 'tpm'];
+      cats.forEach(c => {
+        const el = document.getElementById(`cat-${c}`);
+        if (c === cat) {
+          el.className = "px-4 py-2 rounded-xl text-xs font-extrabold uppercase tracking-wider transition bg-ph-blue text-white border-2 border-ph-gold shrink-0 shadow-lg";
+        } else {
+          el.className = "px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition bg-[#071536] text-blue-100 hover:text-white border border-ph-blue/50 shrink-0";
+        }
+      });
+      renderLeaderboards();
+    }
+
+    function renderLeaderboards() {
+      const meta = CATEGORY_META[activeLeaderCategory];
+      document.getElementById('leader-table-title').textContent = meta.title;
+      const search = document.getElementById('leader-search').value.trim().toLowerCase();
+
+      const sorted = BPBL_DATA.players
+        .filter(p => activeLeaderDivision === 'ALL' || p.div === activeLeaderDivision)
+        .filter(p => !search || p.name.toLowerCase().includes(search) || p.team.toLowerCase().includes(search))
+        .sort((a, b) => {
+          if (b[activeLeaderCategory] !== a[activeLeaderCategory]) {
+            return b[activeLeaderCategory] - a[activeLeaderCategory];
+          }
+          return (b[activeLeaderCategory] / b.gp) - (a[activeLeaderCategory] / a.gp);
+        });
+
+      const spotlight = document.getElementById('leader-spotlight');
+      const thead = document.getElementById('leader-thead');
+      const tbody = document.getElementById('leader-tbody');
+
+      if (sorted.length === 0) {
+        spotlight.innerHTML = `<div class="text-blue-200 text-sm py-8 text-center">No players match your search.</div>`;
+        tbody.innerHTML = `<tr><td colspan="8" class="py-8 text-center text-blue-200">No matching players found.</td></tr>`;
+        return;
+      }
+
+      const top = sorted[0];
+      const topPerGame = (top[activeLeaderCategory] / top.gp).toFixed(1);
+
+      spotlight.innerHTML = `
+        <div class="space-y-4 relative z-10">
+          <div class="flex items-center justify-between">
+            <span class="px-3 py-1 rounded-full bg-ph-gold text-ph-navy font-mono text-[10px] uppercase font-extrabold shadow">
+              ☀ #1 ${meta.label} Leader (${activeLeaderDivision === 'ALL' ? 'All BPBL' : activeLeaderDivision})
+            </span>
+            <span class="font-mono text-xs text-blue-100 font-bold">${top.gp} Tracked GP</span>
+          </div>
+          <div>
+            <div class="text-xs font-mono uppercase text-ph-gold font-bold">★ ${top.team}</div>
+            <h4 class="font-display text-4xl font-bold uppercase text-white tracking-wide mt-0.5">${top.name}</h4>
+          </div>
+          <div class="bg-[#030917]/90 border-2 border-ph-gold/60 rounded-xl p-4 flex items-baseline justify-between">
+            <div>
+              <div class="text-[11px] font-mono uppercase text-blue-200">Total ${meta.label}</div>
+              <div class="font-display text-5xl font-bold text-ph-gold leading-none mt-1">${top[activeLeaderCategory]}</div>
+            </div>
+            <div class="text-right">
+              <div class="text-[11px] font-mono uppercase text-blue-200">${meta.perGameLabel} Average</div>
+              <div class="font-mono text-2xl font-bold text-white mt-1">${topPerGame}</div>
+            </div>
+          </div>
+          <div class="grid grid-cols-4 gap-2 pt-2 text-center">
+            <div class="bg-[#030917]/80 border border-white/20 rounded-lg p-2">
+              <div class="text-[10px] font-mono text-ph-gold">PTS</div>
+              <div class="font-mono text-sm font-bold text-white">${top.pts}</div>
+            </div>
+            <div class="bg-[#030917]/80 border border-white/20 rounded-lg p-2">
+              <div class="text-[10px] font-mono text-ph-gold">REB</div>
+              <div class="font-mono text-sm font-bold text-white">${top.reb}</div>
+            </div>
+            <div class="bg-[#030917]/80 border border-white/20 rounded-lg p-2">
+              <div class="text-[10px] font-mono text-ph-gold">AST</div>
+              <div class="font-mono text-sm font-bold text-white">${top.ast}</div>
+            </div>
+            <div class="bg-[#030917]/80 border border-white/20 rounded-lg p-2">
+              <div class="text-[10px] font-mono text-ph-gold">STL</div>
+              <div class="font-mono text-sm font-bold text-white">${top.stl}</div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      if (activeLeaderCategory === 'pts' || activeLeaderCategory === 'tpm') {
+        thead.innerHTML = `
+          <th class="py-3 px-4 w-12">Rank</th>
+          <th class="py-3 px-4">Player</th>
+          <th class="py-3 px-3 text-center">GP</th>
+          <th class="py-3 px-3 text-center hidden sm:table-cell">2PM</th>
+          <th class="py-3 px-3 text-center">3PM</th>
+          <th class="py-3 px-3 text-center hidden sm:table-cell">FTM</th>
+          <th class="py-3 px-3 text-right">PTS</th>
+          <th class="py-3 px-4 text-right">${meta.perGameLabel}</th>
+        `;
+      } else {
+        thead.innerHTML = `
+          <th class="py-3 px-4 w-12">Rank</th>
+          <th class="py-3 px-4">Player</th>
+          <th class="py-3 px-3 text-center">Eligible GP</th>
+          <th class="py-3 px-3 text-center hidden sm:table-cell">PTS</th>
+          <th class="py-3 px-3 text-right font-bold text-white">Total ${meta.label}</th>
+          <th class="py-3 px-4 text-right">${meta.perGameLabel}</th>
+        `;
+      }
+
+      tbody.innerHTML = sorted.slice(0, 15).map((p, idx) => {
+        const perGame = (p[activeLeaderCategory] / p.gp).toFixed(1);
+        const divTag = p.div === '35+' 
+          ? `<span class="ml-1.5 text-[10px] font-mono px-1.5 py-0.5 rounded bg-ph-red text-white border border-ph-gold/40">35+</span>`
+          : `<span class="ml-1.5 text-[10px] font-mono px-1.5 py-0.5 rounded bg-ph-blue text-white border border-ph-gold/40">OPEN</span>`;
+
+        if (activeLeaderCategory === 'pts' || activeLeaderCategory === 'tpm') {
+          return `
+            <tr class="hover:bg-ph-blue/30 transition">
+              <td class="py-3 px-4 font-mono font-bold ${idx < 3 ? 'text-ph-gold' : 'text-blue-200'}">${idx < 3 ? '★ ' : ''}#${idx + 1}</td>
+              <td class="py-3 px-4">
+                <div class="font-bold text-white">${p.name} ${divTag}</div>
+                <div class="text-[11px] font-mono text-blue-200">${p.team}</div>
+              </td>
+              <td class="py-3 px-3 text-center font-mono text-blue-100">${p.gp}</td>
+              <td class="py-3 px-3 text-center font-mono text-blue-200 hidden sm:table-cell">${p.fg2}</td>
+              <td class="py-3 px-3 text-center font-mono ${activeLeaderCategory === 'tpm' ? 'font-extrabold text-ph-gold text-base' : 'text-blue-100'}">${p.tpm}</td>
+              <td class="py-3 px-3 text-center font-mono text-blue-200 hidden sm:table-cell">${p.ftm}</td>
+              <td class="py-3 px-3 text-right font-mono ${activeLeaderCategory === 'pts' ? 'font-extrabold text-ph-gold text-base' : 'text-white'}">${p.pts}</td>
+              <td class="py-3 px-4 text-right font-mono font-bold text-white">${perGame}</td>
+            </tr>
+          `;
+        } else {
+          return `
+            <tr class="hover:bg-ph-blue/30 transition">
+              <td class="py-3 px-4 font-mono font-bold ${idx < 3 ? 'text-ph-gold' : 'text-blue-200'}">${idx < 3 ? '★ ' : ''}#${idx + 1}</td>
+              <td class="py-3 px-4">
+                <div class="font-bold text-white">${p.name} ${divTag}</div>
+                <div class="text-[11px] font-mono text-blue-200">${p.team}</div>
+              </td>
+              <td class="py-3 px-3 text-center font-mono text-blue-100">${p.gp}</td>
+              <td class="py-3 px-3 text-center font-mono text-blue-200 hidden sm:table-cell">${p.pts}</td>
+              <td class="py-3 px-3 text-right font-mono font-extrabold text-base text-ph-gold">${p[activeLeaderCategory]}</td>
+              <td class="py-3 px-4 text-right font-mono font-bold text-white">${perGame}</td>
+            </tr>
+          `;
+        }
+      }).join('');
+    }
+
+    // =========================================================================
+    // SCOREBOARD TICKER, STANDINGS & GAMES LOG
+    // =========================================================================
+    function renderTicker() {
+      const container = document.getElementById('ticker-container');
+      const latestGames = BPBL_DATA.games.filter(g => g.date === "24/10/2026");
+      container.innerHTML = latestGames.map(g => {
+        const homeWon = g.homeScore > g.awayScore;
+        const divBadge = g.division.includes("35+") ? "35+" : "OPEN";
+        const badgeStyle = g.division.includes("35+")
+          ? "bg-ph-red text-white border-ph-gold/50"
+          : "bg-ph-blue text-white border-ph-gold/50";
+        return `
+          <div class="px-3.5 py-1 shrink-0 flex items-center gap-3 text-xs">
+            <span class="font-mono text-[10px] px-1.5 py-0.5 rounded font-bold border ${badgeStyle}">${divBadge}</span>
+            <div class="space-y-0.5">
+              <div class="flex items-center justify-between gap-4 ${homeWon ? 'text-ph-gold font-bold' : 'text-blue-200'}">
+                <span>${g.home}</span>
+                <span class="font-mono">${g.homeScore}</span>
+              </div>
+              <div class="flex items-center justify-between gap-4 ${!homeWon ? 'text-ph-gold font-bold' : 'text-blue-200'}">
+                <span>${g.away}</span>
+                <span class="font-mono">${g.awayScore}</span>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    let currentStandingsDiv = 'open';
+    function switchStandingsDivision(div) {
+      currentStandingsDiv = div;
+      const btnOpen = document.getElementById('btn-standings-open');
+      const btn35 = document.getElementById('btn-standings-35plus');
+
+      if (div === 'open') {
+        btnOpen.className = "px-4 py-1.5 rounded-lg text-xs font-extrabold uppercase tracking-wider transition bg-ph-blue text-white border border-ph-gold shadow";
+        btn35.className = "px-4 py-1.5 rounded-lg text-xs font-extrabold uppercase tracking-wider transition text-blue-200 hover:text-white";
+      } else {
+        btn35.className = "px-4 py-1.5 rounded-lg text-xs font-extrabold uppercase tracking-wider transition bg-ph-red text-white border border-ph-gold shadow";
+        btnOpen.className = "px-4 py-1.5 rounded-lg text-xs font-extrabold uppercase tracking-wider transition text-blue-200 hover:text-white";
+      }
+      renderStandings();
+    }
+
+    function renderStandings() {
+      const tbody = document.getElementById('standings-tbody');
+      const rows = currentStandingsDiv === 'open' ? BPBL_DATA.standings.open : BPBL_DATA.standings.baliklaro35;
+
+      tbody.innerHTML = rows.map(r => {
+        const pct = (r.w / r.gp).toFixed(3).replace(/^0/, '');
+        const ppg = (r.pf / r.gp).toFixed(1);
+        const diffStr = r.diff > 0 ? `+${r.diff}` : `${r.diff}`;
+        const diffColor = r.diff > 0 ? 'text-ph-gold' : (r.diff < 0 ? 'text-rose-400' : 'text-blue-100');
+
+        let badge = '';
+        if (currentStandingsDiv === 'open') {
+          if (r.w === 5) badge = `<span class="px-2.5 py-0.5 text-[10px] font-mono uppercase rounded-full bg-ph-gold text-ph-navy font-extrabold">☀ Unbeaten 5-0</span>`;
+          else if (r.rank <= 8) badge = `<span class="px-2.5 py-0.5 text-[10px] font-mono uppercase rounded-full bg-ph-blue text-white border border-ph-gold/50 font-bold">★ Top 8 Seed</span>`;
+          else badge = `<span class="px-2.5 py-0.5 text-[10px] font-mono uppercase rounded-full bg-[#030917] text-blue-200 border border-ph-blue/50">In The Hunt</span>`;
+        } else {
+          if (r.w === 3) badge = `<span class="px-2.5 py-0.5 text-[10px] font-mono uppercase rounded-full bg-ph-gold text-ph-navy font-extrabold">☀ Tied 1st (3-1)</span>`;
+          else if (r.rank <= 6) badge = `<span class="px-2.5 py-0.5 text-[10px] font-mono uppercase rounded-full bg-ph-red text-white border border-ph-gold/50 font-bold">★ Contender</span>`;
+          else badge = `<span class="px-2.5 py-0.5 text-[10px] font-mono uppercase rounded-full bg-[#030917] text-blue-200 border border-ph-blue/50">Chasing</span>`;
+        }
+
+        return `
+          <tr class="hover:bg-ph-blue/30 transition">
+            <td class="py-3.5 px-4 font-mono font-bold ${r.rank <= 3 ? 'text-ph-gold' : 'text-blue-200'}">#${r.rank}</td>
+            <td class="py-3.5 px-4 font-bold text-white">${r.team}</td>
+            <td class="py-3.5 px-3 text-center font-mono text-blue-100">${r.gp}</td>
+            <td class="py-3.5 px-3 text-center font-mono font-bold text-white">${r.w}</td>
+            <td class="py-3.5 px-3 text-center font-mono text-blue-200">${r.l}</td>
+            <td class="py-3.5 px-3 text-center font-mono text-blue-200 hidden sm:table-cell">${pct}</td>
+            <td class="py-3.5 px-3 text-right font-mono text-blue-100">${r.pf}</td>
+            <td class="py-3.5 px-3 text-right font-mono text-blue-200">${r.pa}</td>
+            <td class="py-3.5 px-3 text-right font-mono text-white">${ppg}</td>
+            <td class="py-3.5 px-4 text-right font-mono font-extrabold ${diffColor}">${diffStr}</td>
+            <td class="py-3.5 px-4 text-center hidden md:table-cell">${badge}</td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function renderGames() {
+      const dateVal = document.getElementById('filter-date').value;
+      const divVal = document.getElementById('filter-division').value;
+      const searchVal = document.getElementById('filter-team').value.trim().toLowerCase();
+
+      const filtered = BPBL_DATA.games.filter(g => {
+        const matchDate = dateVal === 'ALL' || g.date === dateVal;
+        const matchDiv = divVal === 'ALL' || g.division === divVal;
+        const matchTeam = !searchVal || g.home.toLowerCase().includes(searchVal) || g.away.toLowerCase().includes(searchVal);
+        return matchDate && matchDiv && matchTeam;
+      });
+
+      const grid = document.getElementById('games-grid');
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div class="col-span-full ph-card border border-ph-blue/60 rounded-xl p-8 text-center text-blue-200">No games match your current filter.</div>`;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(g => {
+        const homeWon = g.homeScore > g.awayScore;
+        const is35 = g.division.includes('35+');
+        return `
+          <div class="ph-card border ${is35 ? 'border-ph-red/60' : 'border-ph-blue/60'} hover:border-ph-gold rounded-xl p-4 transition flex flex-col justify-between gap-3 shadow-lg">
+            <div class="flex items-center justify-between text-[11px] font-mono">
+              <span class="px-2.5 py-0.5 rounded font-bold text-white ${is35 ? 'bg-ph-red border border-ph-gold/40' : 'bg-ph-blue border border-ph-gold/40'}">${g.division}</span>
+              <span class="text-ph-gold font-bold">${g.date}</span>
+            </div>
+            <div class="space-y-2 my-1">
+              <div class="flex items-center justify-between ${homeWon ? 'text-white font-extrabold' : 'text-blue-200'}">
+                <span class="text-sm truncate pr-2">${homeWon ? '★ ' : ''}${g.home}</span>
+                <span class="font-mono text-xl ${homeWon ? 'text-ph-gold' : ''}">${g.homeScore}</span>
+              </div>
+              <div class="flex items-center justify-between ${!homeWon ? 'text-white font-extrabold' : 'text-blue-200'}">
+                <span class="text-sm truncate pr-2">${!homeWon ? '★ ' : ''}${g.away}</span>
+                <span class="font-mono text-xl ${!homeWon ? 'text-ph-gold' : ''}">${g.awayScore}</span>
+              </div>
+            </div>
+            <div class="pt-2 border-t border-white/15 flex items-center justify-between text-[11px] text-blue-200 font-mono">
+              <span class="text-white font-bold">FINAL</span>
+              <span>Margin: ${Math.abs(g.homeScore - g.awayScore)} pts</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Initialize Page
+    renderTicker();
+    renderLeaderboards();
+    renderStandings();
+    renderGames();
+  </script>
+</body>
+</html>
