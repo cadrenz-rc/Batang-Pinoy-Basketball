@@ -1,5 +1,13 @@
 (()=>{'use strict';const d=window.BPBL,t=d.teams,$=id=>document.getElementById(id),esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));let mode='total';const catNames={4:'Points',5:'Rebounds',6:'Assists',7:'Steals',8:'Blocks',9:'3-Pointers Made'};function navigate(name){if(!$(name)||!$(name).classList.contains('view'))name='home';try{sessionStorage.setItem('bpbl-active-tab',name)}catch(e){};document.querySelectorAll('.view').forEach(e=>e.classList.toggle('active',e.id===name));document.querySelectorAll('#nav button').forEach(e=>{let on=e.dataset.page===name;e.classList.toggle('active',on);e.setAttribute('aria-current',on?'page':'false')});history.replaceState({},'','#'+name);if(typeof window.gtag==='function')window.gtag('event','bpbl_tab_view',{tab_name:name});window.scrollTo({top:0,behavior:'instant'});if(name==='awards')renderAwards()}document.querySelectorAll('[data-page],[data-go]').forEach(b=>b.addEventListener('click',()=>navigate(b.dataset.page||b.dataset.go)));window.addEventListener('hashchange',()=>navigate(location.hash.slice(1)||'home'));
 
+function renderPlayoffPicture(){
+ const rows=d.standings[0];
+ for(const [id,subset] of [['playoff-tier-one',rows.slice(0,8)],['playoff-tier-two',rows.slice(8,12)],['playoff-tier-out',rows.slice(12,14)]]){
+  const el=$(id);if(!el)continue;
+  el.innerHTML=subset.map(r=>`<div class="playoff-team"><span class="playoff-seed">${r[0]}</span><span class="playoff-name">${esc(t[r[1]])}</span><span class="playoff-record">${r[3]}–${r[4]}</span></div>`).join('');
+ }
+}
+renderPlayoffPicture();
 function renderHomeExtra(){
  const newest=d.games.map((g,i)=>({g,i})).slice(-4).reverse();
  const resultEl=$('home-recent-games');

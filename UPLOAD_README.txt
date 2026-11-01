@@ -1,25 +1,20 @@
-BPBL OFFICIAL PRO — COMPLETE WEBSITE (60 GAMES, OCT 31 2026)
+BPBL OFFICIAL PRO — FINAL PLAYOFF PUSH HOMEPAGE UPDATE
 
-UPLOAD THE FOUR FILES INSIDE THIS ZIP TO THE MAIN ROOT OF YOUR GITHUB REPOSITORY:
+Source: October 31, 2026, iTala 60-game report and previous Open Division standings supplied by BPBL.
 
-1. index.html    — Website layout, embedded BPBL logo, 5 navigation tabs.
-2. app.js        — Interactive navigation and clickable game box scores.
-3. data.js       — IMPORTANT: 60 games, 60 game detail records, updated standings/players. ~53 KB.
-4. assets.js     — ALL 40 player award images stored inside one script file. ~16 MB.
+UPDATE CONTENTS
+- Updated homepage hero: one regular-season game remains (November 21, 2026)
+- Current projected playoff tiers based on October 31 results, automatically drawn from data.js
+- Division 1: seeds 1–8; Division 2: seeds 9–12; currently outside: seeds 13–14
+- No premature elimination claim; seedings provisional until final game day
+- Current standings and all 60 games and player box scores preserved
+- Google Analytics G-CDZZLDRLK7 preserved
+- BPBL logo and 40 original awards preserved in assets.js
 
-Do not upload the ZIP itself. Extract it first. Do not upload the README.
-All four files must appear alongside each other at the repository root, NOT inside a subfolder.
-When GitHub shows existing files, choose to overwrite by uploading same exact names and commit.
+TO PUBLISH
+1. Extract ZIP.
+2. Upload ALL FOUR files in the root to GitHub /cadrenz-rc/Batang-Pinoy-Basketball on main.
+3. Commit. No nested folders. No installer.
+4. Hard-refresh website and verify homepage, navigation, rankings, box scores, award images.
 
-VERIFY AFTER UPLOAD:
-- Open https://github.com/cadrenz-rc/Batang-Pinoy-Basketball
-- Check data.js displays about 53 KB, not 8.7 KB. This was the missing update in the current repository.
-- Check app.js is about 8.9 KB and assets.js about 16 MB.
-- Visit https://cadrenz-rc.github.io/Batang-Pinoy-Basketball/
-- Check: Players of the Game = 40 posters; Previous Matchups = 60; click game for box score.
-- If you see an old page, try a private/incognito browser tab.
-
-DATA NOTES:
-Player statistics were extracted from the iTala Game Box Score Book, dated 31/10/2026.
-Games with no approved player records show an unavailable message, not invented zeros.
-Original award imagery is embedded, not stored as 40 individual .jpg files.
+COURTSIDE REPORT UPDATE, 2026-11-01: Featured top story + three supporting stories; includes previous playoff tiers, all 60 games, 40 posters, analytics. Upload all four .js/.html files at repository root.
