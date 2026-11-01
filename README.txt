@@ -1,8 +1,13 @@
-BPBL Official Pro - IMAGE FIX (flat upload)
+BPBL Official Pro — October 31, 2026 — 60 clickable games and full player box scores
 
-1. Extract the ZIP.
-2. Upload index.html, app.js, data.js, assets.js to the main branch of cadrenz-rc/Batang-Pinoy-Basketball.
-3. Confirm all four files appear in the root folder (no assets subfolder needed).
-4. Commit changes and refresh the site.
+Upload ALL FIVE files directly to the ROOT of your GitHub repository (main):
+  index.html
+  data.js
+  app.js
+  assets.js
+  README.txt (optional)
 
-The logo is embedded in index.html; the 40 original award-poster images are bundled (optimized) in assets.js. No need to upload separate images.
+No folders required. This package includes original logo and 40 awards.
+Open Previous Matchups > choose a game > View Full Box Score.
+If player tracking is unavailable, the modal shows a clear message and official score.
+Source iTala Connect Game Box Score Book generated 31 Oct 2026, 10:18 PM.
