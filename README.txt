@@ -1,23 +1,14 @@
-BPBL Pro — stability and homepage update (October 31, 2026)
+BPBL Google Analytics update — Measurement ID G-CDZZLDRLK7
 
-REPLACE these four files in the main branch of your GitHub repository:
-- index.html
-- app.js
-- data.js
-- assets.js
+1. Extract this ZIP in your phone Files app.
+2. Upload index.html, app.js, data.js, and assets.js together into the ROOT of your GitHub Pages repository (main branch).
+3. Commit changes; open the live BPBL website in an incognito tab.
+4. In Google Analytics, visit Reports > Realtime and test with a visit.
 
-Do not upload the ZIP itself. Extract the ZIP and upload these four files to the top level of the repository. Commit changes.
+Event names:
+  bpbl_tab_view (parameter: tab_name)
+  bpbl_box_score_open (parameter: game_index)
+These custom events may need custom definitions before their parameters appear in standard reports.
 
-Changes:
-- Fixes script load order to initialize after all elements exist
-- League Leaders renders immediately without an extra click
-- Keeps selected page on refresh using URL hash and session storage
-- Makes Home more useful: four clickable current matchups, featured award posters, quick stats, standings and scoring leader
-- Preserves 60 results, 60 game box-score entries, logo and 40 award posters
-
-TEST:
-1. Load website in a private tab, open League Leaders: player table appears without clicking filters
-2. Select 'Per Game', verify rankings change
-3. Open Previous Matchups, select a game, view score and player box score
-4. Refresh Previous Matchups; the same tab remains selected
-5. Return Home, confirm latest results and three award photos render
+All original website content is retained from the prior stability-fix build.
+Analytics counts begin after deployment. Ad blockers or consent settings can affect counts.
