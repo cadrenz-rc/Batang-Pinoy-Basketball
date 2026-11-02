@@ -1,16 +1,8 @@
-BPBL OFFICIAL PRO — INTRO VIDEO + WEEK 6 PLAYER AWARDS + MERCH
+BPBL Season 9 — 604 Fantasy-style Welcome Intro
 
-UPLOAD ALL FIVE FILES TO THE ROOT OF YOUR GITHUB REPOSITORY (main branch):
+Extract this ZIP and upload all five files to the ROOT of your GitHub repository on main:
 index.html, app.js, data.js, assets.js, bpbl-intro.mp4
 
-1. Download ZIP and extract on your phone.
-2. Open https://github.com/cadrenz-rc/Batang-Pinoy-Basketball/upload/main
-3. Select all five files, not the ZIP itself. Commit changes.
-4. After GitHub Pages rebuilds, open the live website in a private tab to see the introduction.
+The opening screen matches the 604 Fantasy league welcome pattern: modal video, Buy Merch link, sound toggle, Replay, Enter BPBL, close X, and a replay button after closing. It opens once per browser session. Merchandise: https://www.facebook.com/share/p/1by3AKD8Jd/
 
-The intro video plays muted (mobile browser autoplay policy), automatically enters the website when finished, and has a Skip Intro button. It appears once per browser tab session. Visitors can always skip.
-Merch opens your provided Facebook post.
-The 8 supplied Week 6 posters are added to the previous 40 awards (48 total).
-Existing site, data, box scores, Google Analytics, and Courtside Report are preserved.
-
-NOVEMBER 21 UPDATE: Official iTala screenshot schedule and editorial playoff stakes added to the HOME page. Upload all five website files at repository root.
+Existing Nov 21 schedule, playoffs report, Google Analytics and awards are unchanged.
