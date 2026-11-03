@@ -1,9 +1,8 @@
-BPBL Team Statistics — Separate Tab Fix
+BPBL — Team Stats Display Update (Nov 3, 2026)
 
-Upload all five files to the root of the GitHub BPBL repository on main:
-index.html, app.js, data.js, assets.js, bpbl-intro.mp4
-Choose Commit changes. Do not upload ZIP directly.
+CHANGE: Removed the 'Tracked GP' column from the Team Statistics table and the 'Tracked games' row from Team Comparison.
+All other team statistics and division filters are preserved. GP remains the official games-played count.
+REB, AST, STL, BLK and 3PM averages still use only games with an available iTala box score. Missing data is never treated as zero.
 
-Team Stats is a dedicated sixth tab beside Standings. The page includes team comparison and division/ranking filters.
-OFFICIAL PPG/OPP PPG: Based on all 60 official games.
-REB/AST/STL/BLK/3PM: Based only on mobile-tracked team games; missing stats are never shown as zero.
+UPLOAD: Extract ZIP and upload index.html, app.js, data.js, assets.js, and bpbl-intro.mp4 to the repository's main branch, replacing existing files.
+Do not upload the ZIP itself.
