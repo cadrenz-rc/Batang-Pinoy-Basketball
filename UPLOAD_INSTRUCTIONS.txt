@@ -1,8 +1,3 @@
-BPBL Season 9 — 604 Fantasy-style Welcome Intro
-
-Extract this ZIP and upload all five files to the ROOT of your GitHub repository on main:
-index.html, app.js, data.js, assets.js, bpbl-intro.mp4
-
-The opening screen matches the 604 Fantasy league welcome pattern: modal video, Buy Merch link, sound toggle, Replay, Enter BPBL, close X, and a replay button after closing. It opens once per browser session. Merchandise: https://www.facebook.com/share/p/1by3AKD8Jd/
-
-Existing Nov 21 schedule, playoffs report, Google Analytics and awards are unchanged.
+BPBL Team Statistics + Gallery Fix
+Extract ZIP. Upload index.html, app.js, data.js, assets.js and bpbl-intro.mp4 to GitHub main repository. Replace the existing files; do not upload the ZIP itself.
+Team statistical averages exclude untracked games.
