@@ -48,6 +48,10 @@ document.querySelectorAll('[data-bracket-image]').forEach(el=>el.addEventListene
  dialog.classList.add('show');document.body.style.overflow='hidden';
 }));
 
+// November 21 game result scorecards open each original iTala box score.
+document.querySelectorAll('#nov21-schedule [data-feature-game]').forEach(el=>{
+ el.addEventListener('click',()=>openBox(Number(el.dataset.featureGame)));
+});
 setupTeamStats();
 
 standings();leaders();games();renderAwards();let initialTab=location.hash.slice(1);if(!initialTab){try{initialTab=sessionStorage.getItem('bpbl-active-tab')}catch(e){}}navigate(initialTab||'home');})();
