@@ -1,15 +1,22 @@
-BPBL SEASON 9 — HOMEPAGE & TOP 10 LEADERBOARD UPDATE
+BPBL SEASON 9 — PLAYOFFS START NOVEMBER 28
 
-Changes
-- Removed the duplicated, large Recent Results and Players of the Game panels from the homepage; replaced them with three compact links to the full tabs.
-- Removed the duplicated Latest Recorded Matchups section from the League Spotlight.
-- League Leaders now displays up to 10 ranked players for the selected division, category, and total/per-game mode.
-- Leaderboard search remains usable and is capped at 10 matching rows.
-- Existing 69 results, both standings, team stats, 54 award posters, embedded playoff bracket art, sponsorship page and video are preserved.
+This complete website update moves the focus to the playoffs.
 
-Deploy to GitHub Pages:
-1. Unzip this package.
-2. Upload its five website files to the ROOT of cadrenz-rc/Batang-Pinoy-Basketball, replacing files with matching names.
-3. Commit. Force-refresh the browser if old content remains cached.
+UPDATES
+- Homepage headline: PLAYOFFS START NOVEMBER 28
+- Main hero action: Explore Playoff Brackets
+- Removed duplicated Nov 21/Nov 28 date cards
+- Kept the three embedded playoff bracket posters and championship timeline
+- Added Final Standings and Read Full Report links directly BELOW the posters
+- Read Full Report expands on demand, keeping the homepage cleaner
+- Preserved the League Leaders Top 10 / Show More behavior
+- Preserved game results, individual player and team statistics, awards and sponsorship features
 
-This is a complete website package, not a patch. The website is not published automatically.
+UPLOAD
+1. Extract all files from this ZIP.
+2. Upload index.html, app.js, data.js, assets.js and bpbl-sponsorship-intro.mp4 to the ROOT of the existing GitHub repository.
+3. Commit the files. Avoid putting them inside a new subfolder.
+4. Reload the published site; hard-refresh if an older page is cached.
+
+The three playoff bracket posters are embedded inside index.html.
+No separate bracket JPG files or Google Drive access are required.
