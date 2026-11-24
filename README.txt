@@ -28,3 +28,13 @@ NOV 24 PLAYOFF PREVIEW UPDATE
 - 30-0 score-only results excluded from ON-COURT scoring averages (not from standings).
 - No external schedule poster JPG upload needed.
 - Upload the five site files from the root of this extracted folder.
+
+NOVEMBER 28 SCHEDULE UPDATE — NOVEMBER 24, 2026
+- Replaced the November 28 poster with the newest BPBL schedule image supplied by the league.
+- Updated the interactive schedule AND head-to-head previews to match the corrected game times.
+- 1:00 PM: Sando Republika vs Fitman Hunter (Division 2 semifinal).
+- 2:00 PM: Wild Tribe vs Pipers (Open Division quarterfinal).
+- Remaining game times unchanged: 12:00 PM, 3:00 PM, 4:00 PM, 5:00 PM, 6:00 PM, 7:00 PM.
+- The poster is embedded in index.html: NO extra image upload required.
+- Preserve the repository CNAME file containing bpblhub.com so your domain stays connected.
+- All five required website files are included, with updated app.js cache version.

@@ -75,8 +75,8 @@ document.querySelectorAll('#nov21-schedule [data-feature-game]').forEach(el=>{
 // November 28, 2026 Playoff Game Day previews. Scores and player stats derive from existing Season 9 data.
 const playoffSchedule=[
  {time:'12:00 PM',a:2,b:4,stage:'Open Division · Quarterfinal 2',group:'top8'},
- {time:'1:00 PM',a:3,b:6,stage:'Open Division · Quarterfinal 4',group:'top8'},
- {time:'2:00 PM',a:9,b:7,stage:'Division 2 · Semifinal',group:'div2'},
+ {time:'1:00 PM',a:9,b:7,stage:'Division 2 · Semifinal',group:'div2'},
+ {time:'2:00 PM',a:3,b:6,stage:'Open Division · Quarterfinal 4',group:'top8'},
  {time:'3:00 PM',a:11,b:12,stage:'Division 2 · Semifinal',group:'div2'},
  {time:'4:00 PM',a:0,b:8,stage:'Open Division · Quarterfinal 1',group:'top8'},
  {time:'5:00 PM',a:1,b:5,stage:'Open Division · Quarterfinal 3',group:'top8'},
