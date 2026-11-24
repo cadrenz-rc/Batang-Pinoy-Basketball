@@ -1,22 +1,15 @@
-BPBL SEASON 9 — BRACKET & RESULTS DISPLAY FIX (NOV 23, 2026)
+BPBL SEASON 9 — HOMEPAGE & TOP 10 LEADERBOARD UPDATE
 
-This package fixes:
-- Missing bracket thumbnails and full-size playoff posters. All three images are now embedded inside index.html. NO SEPARATE BRACKET JPG UPLOADS REQUIRED.
-- Invisible team names in the Nov 21 results list; all nine final scores are now readable on white cards.
-- Result cards now open box scores when clicked.
-- Sponsorship-video replay button no longer overlaps page content; find it inside Contact & Sponsorship.
+Changes
+- Removed the duplicated, large Recent Results and Players of the Game panels from the homepage; replaced them with three compact links to the full tabs.
+- Removed the duplicated Latest Recorded Matchups section from the League Spotlight.
+- League Leaders now displays up to 10 ranked players for the selected division, category, and total/per-game mode.
+- Leaderboard search remains usable and is capped at 10 matching rows.
+- Existing 69 results, both standings, team stats, 54 award posters, embedded playoff bracket art, sponsorship page and video are preserved.
 
-What remains: 69 reported matchups, player and team stats, standings, 54 award posters, contact/sponsorship page and approved sponsorship intro video.
+Deploy to GitHub Pages:
+1. Unzip this package.
+2. Upload its five website files to the ROOT of cadrenz-rc/Batang-Pinoy-Basketball, replacing files with matching names.
+3. Commit. Force-refresh the browser if old content remains cached.
 
-GITHUB UPLOAD:
-1. Unzip this archive.
-2. Upload the FIVE files from the ZIP root to the ROOT of the GitHub repository: cadrenz-rc/Batang-Pinoy-Basketball
-   index.html
-   app.js
-   data.js
-   assets.js
-   bpbl-sponsorship-intro.mp4
-3. Commit changes and reload the website (hard refresh if necessary).
-4. In the repo, any old bracket JPGs are optional; you no longer need to upload them.
-
-Notes: Results are based on the 69-game iTala box-score report (Nov 23), including nine November 21 results. One game was omitted by the source report. Missing player box scores remain unavailable rather than 0.
+This is a complete website package, not a patch. The website is not published automatically.
