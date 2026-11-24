@@ -71,6 +71,118 @@ document.querySelectorAll('[data-bracket-image]').forEach(el=>el.addEventListene
 document.querySelectorAll('#nov21-schedule [data-feature-game]').forEach(el=>{
  el.addEventListener('click',()=>openBox(Number(el.dataset.featureGame)));
 });
+
+// November 28, 2026 Playoff Game Day previews. Scores and player stats derive from existing Season 9 data.
+const playoffSchedule=[
+ {time:'12:00 PM',a:2,b:4,stage:'Open Division · Quarterfinal 2',group:'top8'},
+ {time:'1:00 PM',a:3,b:6,stage:'Open Division · Quarterfinal 4',group:'top8'},
+ {time:'2:00 PM',a:9,b:7,stage:'Division 2 · Semifinal',group:'div2'},
+ {time:'3:00 PM',a:11,b:12,stage:'Division 2 · Semifinal',group:'div2'},
+ {time:'4:00 PM',a:0,b:8,stage:'Open Division · Quarterfinal 1',group:'top8'},
+ {time:'5:00 PM',a:1,b:5,stage:'Open Division · Quarterfinal 3',group:'top8'},
+ {time:'6:00 PM',a:17,b:18,stage:'Baliklaro 35+ · Quarterfinal 2',group:'35plus'},
+ {time:'7:00 PM',a:16,b:19,stage:'Baliklaro 35+ · Quarterfinal 1',group:'35plus'}
+];
+function buildMatchupStats(){
+ const stat=d.teams.map((name,id)=>({name,id,pts:0,opp:0,played:0,tracked:0,reb:0,ast:0,stl:0,blk:0,tpm:0,results:[]}));
+ d.games.forEach((g,i)=>{
+  const admin=(g[3]===0&&g[5]===30)||(g[3]===30&&g[5]===0);
+  [[g[2],g[3],g[5],g[4],0],[g[4],g[5],g[3],g[2],1]].forEach(([id,points,opponent,oppId,side])=>{
+   const row=stat[id];row.results.push({date:g[0],opponent:oppId,points,allowed:opponent,win:points>opponent,admin});
+   if(admin)return;
+   row.played++;row.pts+=points;row.opp+=opponent;
+   const box=d.boxScores[i],tot=box&&box.totals&&box.totals[side];
+   if(Array.isArray(tot)&&tot.length>=9){row.tracked++;row.tpm+=Number(tot[2]||0);row.reb+=Number(tot[4]||0);row.ast+=Number(tot[5]||0);row.stl+=Number(tot[6]||0);row.blk+=Number(tot[7]||0)}
+  });
+ });
+ return stat;
+}
+const playoffTeamStats=buildMatchupStats();
+const previewSeed=new Map(d.standings.flatMap(rows=>rows.map(r=>[r[1],{seed:r[0],w:r[3],l:r[4]}])));
+function previewAvg(row,metric){const denom=['pts','opp'].includes(metric)?row.played:row.tracked;return denom?row[metric]/denom:null}
+function previewNum(n){return n===null?'—':n.toFixed(1)}
+function previewPlayer(team,metric){
+ const eligible=d.players.filter(p=>p[1]===team&&p[3]>0);const selection=eligible.some(p=>p[3]>=3)?eligible.filter(p=>p[3]>=3):eligible;
+ const idx={ppg:4,rpg:5,apg:6}[metric];
+ return selection.slice().sort((a,b)=>b[idx]/b[3]-a[idx]/a[3]||b[idx]-a[idx]||a[0].localeCompare(b[0]))[0]||null;
+}
+function previewPlayerCell(team,label,metric){
+ const p=previewPlayer(team,metric);if(!p)return `<div class="bpbl-preview-playerrow"><span>${label}</span><b>Unavailable</b></div>`;
+ const val=p[{ppg:4,rpg:5,apg:6}[metric]]/p[3];
+ return `<div class="bpbl-preview-playerrow"><span>${label}</span><b>${esc(p[0])} · ${val.toFixed(1)} ${metric.toUpperCase()}</b><small>${p[3]} recorded stat games</small></div>`;
+}
+function previewRecent(team){return playoffTeamStats[team].results.slice(-3).reverse().map(g=>`<p><span class="${g.win?'bpbl-preview-result-w':'bpbl-preview-result-l'}">${g.win?'W':'L'}</span> · ${esc(g.date)} · ${esc(t[g.opponent])} · ${g.points}–${g.allowed}${g.admin?' (30–0 score-only result)':''}</p>`).join('')}
+function previewMeeting(a,b){
+ const games=d.games.filter(g=>(g[2]===a&&g[4]===b)||(g[2]===b&&g[4]===a));
+ if(!games.length)return 'No regular-season meeting in the available results.';
+ return games.map(g=>`${esc(g[0])}: <strong>${esc(t[g[2]])} ${g[3]}–${g[5]} ${esc(t[g[4]])}</strong>${(g[3]===0&&g[5]===30)||(g[3]===30&&g[5]===0)?' (30–0 score-only result)':''}`).join('<br>');
+}
+function previewEdge(a,b){
+ const x=playoffTeamStats[a],y=playoffTeamStats[b],details=[];
+ const scoring=previewAvg(x,'pts'),other=previewAvg(y,'pts');
+ if(scoring!==null&&other!==null&&Math.abs(scoring-other)>=1)details.push(`<strong>${esc(t[scoring>other?a:b])}</strong> scores more points per game (${previewNum(Math.max(scoring,other))} vs ${previewNum(Math.min(scoring,other))})`);
+ const allowed=previewAvg(x,'opp'),otherAllowed=previewAvg(y,'opp');
+ if(allowed!==null&&otherAllowed!==null&&Math.abs(allowed-otherAllowed)>=1)details.push(`<strong>${esc(t[allowed<otherAllowed?a:b])}</strong> allows fewer points per game (${previewNum(Math.min(allowed,otherAllowed))} vs ${previewNum(Math.max(allowed,otherAllowed))})`);
+ const threes=previewAvg(x,'tpm'),otherThrees=previewAvg(y,'tpm');
+ if(threes!==null&&otherThrees!==null&&Math.abs(threes-otherThrees)>=.5)details.push(`<strong>${esc(t[threes>otherThrees?a:b])}</strong> averages more made threes in recorded games`);
+ return details.length?details.slice(0,3).join('; ')+'.':'Their available statistical profiles are close in the compared categories.';
+}
+function previewStatRow(a,b,label,metric,lowerIsBetter=false){
+ const aVal=previewAvg(playoffTeamStats[a],metric),bVal=previewAvg(playoffTeamStats[b],metric);
+ const delta=aVal===null||bVal===null?0:(lowerIsBetter?bVal-aVal:aVal-bVal);
+ const aEdge=delta>0.05,bEdge=delta<-.05;
+ return `<div class="bpbl-preview-statrow"><strong${aEdge?' class="stat-edge"':''}>${previewNum(aVal)}</strong><span class="bpbl-stat-name">${label}</span><strong${bEdge?' class="stat-edge"':''}>${previewNum(bVal)}</strong></div>`;
+}
+function previewHTML(game){
+ const {a,b,time,stage,group}=game,seedA=previewSeed.get(a),seedB=previewSeed.get(b);
+ const [sa,sb]=[seedA,seedB].map(x=>x||{seed:'?',w:'–',l:'–'});
+ return `<details class="bpbl-matchup-card" data-matchup-group="${group}"><summary aria-label="View matchup preview: ${esc(t[a])} versus ${esc(t[b])}, ${time}">
+  <span class="bpbl-matchup-time">${time.replace(' ','&nbsp;')}<small>PACIFIC</small></span>
+  <span class="bpbl-matchup-summary-text"><span class="bpbl-matchup-division">${esc(stage)}</span><span class="bpbl-matchup-names">${esc(t[a])}<span class="bpbl-matchup-vs">vs</span>${esc(t[b])}</span></span>
+  <span class="bpbl-matchup-open-label">View Preview</span><span class="bpbl-matchup-toggle" aria-hidden="true">+</span></summary>
+  <div class="bpbl-matchup-expanded">
+   <div class="bpbl-matchup-teams"><div class="bpbl-matchup-team"><strong>#${sa.seed} ${esc(t[a])}</strong><span>${sa.w}–${sa.l} regular season</span></div><div class="bpbl-matchup-versus">VS</div><div class="bpbl-matchup-team"><strong>#${sb.seed} ${esc(t[b])}</strong><span>${sb.w}–${sb.l} regular season</span></div></div>
+   <div class="bpbl-preview-stats" role="table" aria-label="Season 9 team averages for ${esc(t[a])} versus ${esc(t[b])}">
+    <div class="bpbl-preview-statrow bpbl-preview-stathead" role="row"><strong>${esc(t[a])}</strong><span class="bpbl-stat-name">SEASON 9 AVERAGES</span><strong>${esc(t[b])}</strong></div>
+    ${previewStatRow(a,b,'Points per game (PPG)','pts')}
+    ${previewStatRow(a,b,'Opponent PPG','opp',true)}
+    ${'<div class="bpbl-preview-statrow"><strong'+(previewAvg(playoffTeamStats[a],'pts')!==null&&previewAvg(playoffTeamStats[b],'pts')!==null&&((previewAvg(playoffTeamStats[a],'pts')-previewAvg(playoffTeamStats[a],'opp'))>(previewAvg(playoffTeamStats[b],'pts')-previewAvg(playoffTeamStats[b],'opp')))?' class="stat-edge"':'')+'>'+previewNum(previewAvg(playoffTeamStats[a],'pts')!==null?previewAvg(playoffTeamStats[a],'pts')-previewAvg(playoffTeamStats[a],'opp'):null)+'</strong><span class="bpbl-stat-name">Scoring margin / game</span><strong'+(previewAvg(playoffTeamStats[a],'pts')!==null&&previewAvg(playoffTeamStats[b],'pts')!==null&&((previewAvg(playoffTeamStats[b],'pts')-previewAvg(playoffTeamStats[b],'opp'))>(previewAvg(playoffTeamStats[a],'pts')-previewAvg(playoffTeamStats[a],'opp')))?' class="stat-edge"':'')+'>'+previewNum(previewAvg(playoffTeamStats[b],'pts')!==null?previewAvg(playoffTeamStats[b],'pts')-previewAvg(playoffTeamStats[b],'opp'):null)+'</strong></div>'}
+    ${previewStatRow(a,b,'Rebounds / game*','reb')}
+    ${previewStatRow(a,b,'Assists / game*','ast')}
+    ${previewStatRow(a,b,'Steals / game*','stl')}
+    ${previewStatRow(a,b,'Blocks / game*','blk')}
+    ${previewStatRow(a,b,'Made 3s / game*','tpm')}
+   </div>
+   <div class="bpbl-preview-block-title">Players to Watch · Per Game</div>
+   <div class="bpbl-preview-watch"><div class="bpbl-preview-playercard"><strong>${esc(t[a])}</strong>${previewPlayerCell(a,'Leading scorer','ppg')}${previewPlayerCell(a,'Leading rebounder','rpg')}${previewPlayerCell(a,'Leading playmaker','apg')}</div><div class="bpbl-preview-playercard"><strong>${esc(t[b])}</strong>${previewPlayerCell(b,'Leading scorer','ppg')}${previewPlayerCell(b,'Leading rebounder','rpg')}${previewPlayerCell(b,'Leading playmaker','apg')}</div></div>
+   <div class="bpbl-preview-block-title">Previous Meeting</div><div class="bpbl-preview-h2h">${previewMeeting(a,b)}</div>
+   <div class="bpbl-preview-block-title">Recent Form · Last 3 Results</div><div class="bpbl-preview-match-history"><div class="bpbl-preview-history-card"><strong>${esc(t[a])}</strong>${previewRecent(a)}</div><div class="bpbl-preview-history-card"><strong>${esc(t[b])}</strong>${previewRecent(b)}</div></div>
+   <div class="bpbl-preview-block-title">Statistical Edge</div><div class="bpbl-preview-keys">${previewEdge(a,b)} <strong>Season averages describe past results, not a prediction.</strong></div>
+   <p class="bpbl-preview-coverage">* Non-scoring averages use games with tracked player/team box scores only. Featured player averages prioritize those with at least 3 recorded stat games. Team PPG, opponent PPG and scoring margin exclude 30–0 score-only results; win–loss records keep the recorded results.</p>
+  </div></details>`;
+}
+function renderPlayoffSchedule(){
+ const list=$('bpbl-playoff-matchups');if(!list)return;
+ list.innerHTML=playoffSchedule.map(previewHTML).join('');
+ const cards=Array.from(list.querySelectorAll('details.bpbl-matchup-card'));
+ cards.forEach(card=>card.addEventListener('toggle',()=>{if(card.open){cards.forEach(other=>{if(other!==card)other.open=false});if(typeof window.gtag==='function')window.gtag('event','bpbl_matchup_preview_open',{matchup:card.querySelector('.bpbl-matchup-names').textContent})}}));
+ const filters=$('bpbl-schedule-filters');if(filters)filters.querySelectorAll('button[data-playoff-filter]').forEach(button=>button.addEventListener('click',()=>{
+  const value=button.dataset.playoffFilter;filters.querySelectorAll('button').forEach(b=>{const selected=b===button;b.classList.toggle('is-active',selected);b.setAttribute('aria-pressed',String(selected))});
+  cards.forEach(card=>{card.open=false;card.hidden=value!=='all'&&card.dataset.matchupGroup!==value});
+ }));
+ const posterBtn=$('bpbl-schedule-poster-trigger');if(posterBtn)posterBtn.addEventListener('click',()=>{
+  const image=$('lightbox-image'),dialog=$('lightbox');if(!image||!dialog)return;
+  image.src=posterBtn.querySelector('img').src;image.alt='Full-size November 28 BPBL Season 9 playoff schedule';
+  $('lightbox-caption').textContent='BPBL Season 9 · November 28 · Middle School Gym';
+  dialog.classList.add('show');document.body.style.overflow='hidden';
+ });
+ document.querySelectorAll('[data-playoff-schedule-link]').forEach(button=>button.addEventListener('click',()=>{
+  navigate('brackets');if(filters){const all=filters.querySelector('[data-playoff-filter="all"]');if(all)all.click();}
+  requestAnimationFrame(()=>{const target=$('bpbl-playoff-schedule');if(target)target.scrollIntoView({behavior:'smooth',block:'start'})});
+ }));
+}
+renderPlayoffSchedule();
+
 setupTeamStats();
 
 standings();leaders();games();renderAwards();let initialTab=location.hash.slice(1);if(!initialTab){try{initialTab=sessionStorage.getItem('bpbl-active-tab')}catch(e){}}navigate(initialTab||'home');})();

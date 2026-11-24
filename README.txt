@@ -20,3 +20,11 @@ UPLOAD
 
 The three playoff bracket posters are embedded inside index.html.
 No separate bracket JPG files or Google Drive access are required.
+
+NOV 24 PLAYOFF PREVIEW UPDATE
+- Homepage: compact November 28 schedule link and a single November 21 results link.
+- Playoff Brackets tab: full November 28 schedule poster (embedded in index.html), filters and eight expandable head-to-head preview cards.
+- Every card: verified seeds and records, team PPG/opponent PPG, tracked-box-score averages, players to watch by per-game averages, previous meeting, recent form, and statistical notes.
+- 30-0 score-only results excluded from ON-COURT scoring averages (not from standings).
+- No external schedule poster JPG upload needed.
+- Upload the five site files from the root of this extracted folder.
