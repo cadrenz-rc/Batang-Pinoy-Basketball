@@ -38,3 +38,9 @@ NOVEMBER 28 SCHEDULE UPDATE — NOVEMBER 24, 2026
 - The poster is embedded in index.html: NO extra image upload required.
 - Preserve the repository CNAME file containing bpblhub.com so your domain stays connected.
 - All five required website files are included, with updated app.js cache version.
+
+
+NOVEMBER 28 SCHEDULE CORRECTION (NOV 26):
+1:00 PM - Wild Tribe vs Pipers
+2:00 PM - Sando Republika vs Fitman Hunter
+All other games unchanged. The poster is embedded in index.html; upload the five website files to repository root, retain CNAME for bpblhub.com.
